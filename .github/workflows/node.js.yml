@@ -21,12 +21,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
-      working-directory: ./my-app
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - name: Install Dependencies
+      working-directory: ./my-app
+      run: npm install
+    - name: Build
+      working-directory: ./my-app
+      run: npm run build
+    - name: Test
+      working-directory: ./my-app
+      run: npm test
       env:
         CI: true

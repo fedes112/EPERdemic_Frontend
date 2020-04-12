@@ -1,5 +1,5 @@
 import React from 'react';
-import Example from './components/form.js'
+import Formulary from './components/form.js'
 import {Container, Row, Col} from 'react-bootstrap';
 import './dist/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,7 +11,7 @@ function App() {
 <Container className= 'container'>
   <Row>
     <Col xs={9}></Col>
-    <Col><Example/></Col>
+    <Col><Formulary/></Col>
   </Row>
 </Container>
 </div>

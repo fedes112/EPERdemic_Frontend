@@ -1,31 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form'
 import {Form, Button} from 'react-bootstrap';
-import {usePost } from '../hooks/useFetch';
+import {usePost} from '../hooks/useFetch';
 
 
 
-function Example() {
+function Formulary() {
     const [wizard,setWizard] = useState();
     const {
          register, handleSubmit
       } = useForm();
     const [submitWizard, setSubmitWizard] = useState(false);
-    const sendWizard = () => console.log(wizard);
-    //(usePost )('/wizard', wizard);
-    //Modificar url
+    const sendWizard = (usePost)('/personaje', wizard);
 
 
     useEffect(() => {
         if (!submitWizard) return;
         sendWizard();
+        console.log(wizard);
         setSubmitWizard(false);
     }, [submitWizard]);
 
     const handleSendWizard = data => {
-        setWizard({ ...wizard, name: data.name });
+        setWizard({ ...wizard, nombre: data.name });
         setSubmitWizard(true);
-        
+        console.log(data);
     };
 
   
@@ -45,4 +44,4 @@ function Example() {
     
 };
 
-export default Example
+export default Formulary

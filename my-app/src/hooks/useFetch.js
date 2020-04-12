@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const server = "localhost que usemos por ahora";
+const server = 'http://localhost:8080';
 
-const useFetch = (fetch, [path, setData = () => {}, body = {}]) => {
+const useFetch = (fetch, [path, body = {}]) => {
 
   const logError = (err) => {
     console.error(err.response);
     throw err;
   };
-
+  console.log(body);
   const URL = () => `${server}${path}`;
   return () => fetch(URL(), body)
     .then(r => r.data)

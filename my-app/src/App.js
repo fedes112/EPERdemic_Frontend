@@ -8,13 +8,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div  className='App'>
-<Container className= 'container'>
-  <Row>
-    <Col xs={9}></Col>
-    <Col><Formulary/></Col>
-  </Row>
-</Container>
-</div>
+        <Row >
+        <Col ><Formulary/></Col>
+        <Col ><Formulary/></Col>
+        <Col style={{ height: '100vh', width: '100vw',display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}><Formulary/></Col>
+        </Row>
+
+  </div>
   );
 }
 

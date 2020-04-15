@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form'
-import {Form, Button} from 'react-bootstrap';
+import {Form, Button, Card, Container} from 'react-bootstrap';
 import {usePost} from '../hooks/useFetch';
 
 
@@ -29,17 +29,26 @@ function Formulary() {
 
   
     return ( 
-            <Form onSubmit={ 
-                handleSubmit(handleSendWizard)
-                }>
-                <Form.Group>
-                    <Form.Label className="alert alert-danger" role="alert">NAME</Form.Label>
-                    <Form.Control ref= {register} name ='name' type="wizard" placeholder="Enter wizard name" />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                Submit
-                </Button>
-            </Form>
+       <Container fluid>
+            <Card className="text-center">
+                <Card.Header></Card.Header>
+                <Card.Body>
+                <Form onSubmit={ 
+                                handleSubmit(handleSendWizard)
+                                }>
+                                <Form.Group>
+                                    <Form.Label className="alert alert-danger" role="alert">NAME</Form.Label>
+                                    <Form.Control ref= {register} name ='name' type="wizard" placeholder="Enter wizard name" />
+                                </Form.Group>
+                                <Button variant="primary" type="submit">
+                                Submit
+                                </Button>
+                            </Form>
+                    <Card.Title></Card.Title>
+                </Card.Body>
+                <Card.Footer className="text-muted"></Card.Footer>
+            </Card>
+        </Container> 
     );
     
 };

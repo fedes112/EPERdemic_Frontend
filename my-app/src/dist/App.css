@@ -1,10 +1,9 @@
 .App {
-  background-image: url(./eperdemic.jpg);
+  background-image: url(./eperdemic2.jpg);
   position: fixed;
-top: 0;
-width: 100%;
-height: 100%;
-background-size: cover;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
 }
 
 .App-header {

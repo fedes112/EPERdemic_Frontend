@@ -6,24 +6,24 @@ import {usePost} from '../hooks/useFetch';
 
 
 function Formulary() {
-    const [wizard,setWizard] = useState();
+    const [pathogen,setPathogen] = useState();
     const {
          register, handleSubmit
       } = useForm();
-    const [submitWizard, setSubmitWizard] = useState(false);
-    const sendWizard = (usePost)('/personaje', wizard);
+    const [submitPathogen, setSubmitPathogen] = useState(false);
+    const sendPathogen = (usePost)('/patogeno', pathogen);
 
 
     useEffect(() => {
-        if (!submitWizard) return;
-        sendWizard();
-        console.log(wizard);
-        setSubmitWizard(false);
-    }, [submitWizard]);
+        if (!submitPathogen) return;
+        sendPathogen();
+        console.log(pathogen);
+        setSubmitPathogen(false);
+    }, [submitPathogen]);
 
     const handleSendWizard = data => {
-        setWizard({ ...wizard, nombre: data.name });
-        setSubmitWizard(true);
+        setPathogen({ ...pathogen, nombre: data.name });
+        setSubmitPathogen(true);
         console.log(data);
     };
 

@@ -37,8 +37,8 @@ function Formulary() {
                                 handleSubmit(handleSendWizard)
                                 }>
                                 <Form.Group>
-                                    <Form.Label className="alert alert-danger" role="alert">NAME</Form.Label>
-                                    <Form.Control ref= {register} name ='name' type="wizard" placeholder="Enter wizard name" />
+                                    <Form.Label className="alert alert-danger" role="alert">Nombre Agente Patógeno</Form.Label>
+                                    <Form.Control ref= {register} name ='name' placeholder="" />
                                 </Form.Group>
                                 <Button variant="primary" type="submit">
                                 Submit

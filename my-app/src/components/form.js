@@ -22,7 +22,7 @@ function Formulary() {
     }, [submitPathogen]);
 
     const handleSendPathogen = data => {
-        setPathogen({ ...pathogen, nombre: data.name });
+        setPathogen({ ...pathogen, tipo: data.tipo });
         setSubmitPathogen(true);
         console.log(data);
     };
@@ -38,7 +38,7 @@ function Formulary() {
                                 }>
                                 <Form.Group>
                                     <Form.Label className="alert alert-danger" role="alert">Nombre Agente Patógeno</Form.Label>
-                                    <Form.Control ref= {register} name ='name' placeholder="" />
+                                    <Form.Control ref= {register} name ='tipo' placeholder="" />
                                 </Form.Group>
                                 <Button variant="primary" type="submit">
                                 Submit

@@ -26,8 +26,3 @@ jobs:
     - name: Build
       working-directory: ./my-app
       run: npm run build
-    - name: Test
-      working-directory: ./my-app
-      run: npm test
-      env:
-        CI: true

@@ -1,7 +1,7 @@
 
 import Formulary from './components/form.js'
 import patogens from './components/patogens.js'
-import {Row, Col, Modal} from 'react-bootstrap';
+import {Row, Col, ListGroup} from 'react-bootstrap';
 import './dist/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
@@ -19,17 +19,15 @@ function App() {
 
   const renderModal = pathongens_button()
   return (
-    <div  className='App'>
+    <div className='App'>
         <Row >
           <Col >
-              <Modal>
-                <Modal.Header >
-                  <Modal.Title>TEST</Modal.Title>
-                </Modal.Header>
-                <Modal.Body className="p-0">TEST</Modal.Body>
-              </Modal>
+            <ListGroup className="list-group-vertical-sm">
+                {console.log('PATOGENOS',pathogens)
+                }
+            </ListGroup>
           </Col>
-          <Col ></Col>
+          <Col/>
         <Col >
           <div style={{ height: '50vh' ,display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                {renderModal}

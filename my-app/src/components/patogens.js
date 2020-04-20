@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form'
 import {Button, Card, Container} from 'react-bootstrap';
 import {useGet} from '../hooks/useFetch';
 
 
 export default () => {
-    const [pathogens,setpathogens] = useState();
-    const {
-         register, handleSubmit
-      } = useForm();
+    const [pathogens, setPathogens] = useGet('/patogeno');// eslint-disable-line no-unused-vars
     const [getPatogenos, setGetPatogenos] = useState(false);
-
-    const all_pathogens = (useGet)('/patogeno');
-
+    
     useEffect(() => {
         if (!getPatogenos) return;
-        all_pathogens();
+        console.log(pathogens);
         setGetPatogenos(false);
+          // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [getPatogenos]);
 
     const handleGetPathogens = () => {
@@ -27,7 +22,7 @@ export default () => {
        <Container fluid>
             <Card className="text-center">
                 <Card.Body>
-                    <Button variant="primary" size="lg" onSubmit={ handleSubmit(handleGetPathogens)}>
+                    <Button variant="primary" size="lg" type="submit" onClick={handleGetPathogens}>
                         Patógenos Actuales
                     </Button>{' '}
                 </Card.Body>

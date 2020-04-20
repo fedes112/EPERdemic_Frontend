@@ -3,16 +3,17 @@ import axios from 'axios';
 
 const server = 'http://localhost:8080';
 
-const useFetch = (fetch, [path, body = {}]) => {
+const useFetch = (fetch, [path, setData = () => {}, body = {}]) => {
 
   const logError = (err) => {
     console.error(err.response);
     throw err;
   };
-  console.log(body);
+  
   const URL = () => `${server}${path}`;
   return () => fetch(URL(), body)
     .then(r => r.data)
+    .then(setData)
     .catch(logError);
 };
 
@@ -22,7 +23,9 @@ const useGet = (path, initial = {}, onError = () => {}) => {
 
   useEffect(() => {
     if (path) fetch().catch(onError);
-  }, []); 
+  },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  []); 
   return [data, setData];
 };
 

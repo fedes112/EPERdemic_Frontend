@@ -1,0 +1,2 @@
+export const CLIENT_SERVER = 'CLIENT_SERVER'
+export const BACKEND_SERVER = 'BACKEND_SERVER'

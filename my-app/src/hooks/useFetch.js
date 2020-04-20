@@ -1,35 +1,29 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "axios";
 
-const server = 'http://localhost:8080';
+const servers = Object.freeze({
+  CLIENT_SERVER: "http://localhost:8080",
+  BACKEND_SERVER:
+    "https://cors-anywhere.herokuapp.com/http://eperdemic-backend.herokuapp.com",
+});
 
-const useFetch = (fetch, [path, setData = () => {}, body = {}]) => {
-
+const useFetch = (server, fetch, [path, setData = () => {}, body = {}]) => {
   const logError = (err) => {
     console.error(err.response);
     throw err;
   };
-  
-  const URL = () => `${server}${path}`;
-  return () => fetch(URL(), body)
-    .then(r => r.data)
-    .then(setData)
-    .catch(logError);
+
+  const URL = () => `${servers[server]}${path}`;
+  return () =>
+    fetch(URL(), body)
+      .then((r) => r.data)
+      .then(setData)
+      .catch(logError);
 };
 
-const useGet = (path, initial = {}, onError = () => {}) => {
-  const [data, setData] = useState(initial);
-  const fetch = useFetch(axios.get, [path, setData]);
+const useGet = (server, ...args) => useFetch(server, axios.get, args);
 
-  useEffect(() => {
-    if (path) fetch().catch(onError);
-  },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  []); 
-  return [data, setData];
-};
+const usePost = (server, ...args) => useFetch(server, axios.post, args);
 
-const usePut = (...args) => useFetch(axios.put, args);
-const usePost = (...args) => useFetch(axios.post, args);
+const usePut = (server, ...args) => useFetch(server, axios.put, args);
 
 export { useGet, usePut, usePost };

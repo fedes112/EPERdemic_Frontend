@@ -1,25 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import Formulary from './components/form.js'
+import patogens from './components/patogens.js'
+import {Row, Col, ListGroup} from 'react-bootstrap';
+import './dist/App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState, useEffect } from 'react';
+
+ //show={isShown} onHide={hide}
 
 function App() {
+
+  const [pathogens,setpathogens] = useState([]);
+  const [pathogens_effect, pathongens_button] = patogens();
+
+  useEffect(() => {
+    setpathogens(pathogens_effect);
+    }, [pathogens_effect]);
+
+  const renderModal = pathongens_button()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className='App'>
+        <Row >
+          <Col >
+            <ListGroup className="list-group-vertical-sm">
+                {console.log('PATOGENOS',pathogens)
+                }
+            </ListGroup>
+          </Col>
+          <Col/>
+        <Col >
+          <div style={{ height: '50vh' ,display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+               {renderModal}
+          </div>
+          <div style={{ height: '50vh', display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+               <Formulary />
+          </div>
+        </Col>
+        </Row>
+
+  </div>
   );
 }
 

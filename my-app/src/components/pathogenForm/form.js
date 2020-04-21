@@ -43,11 +43,11 @@ const PathogenForm = () => {
   useEffect(() => {
     if (pathogenReturned)
       setPathogenEnriched(enrichPathogen(pathogenReturned, groupName));
-  }, [pathogenReturned]);
+  }, [groupName, pathogenReturned]);
 
   useEffect(() => {
     if (pathogenEnriched) sendPathogenBackend();
-  }, [pathogenEnriched]);
+  }, [pathogenEnriched, sendPathogenBackend]);
 
   const handleSendPathogen = (data) => {
     setPathogen({ ...pathogen, tipo: data.tipo });

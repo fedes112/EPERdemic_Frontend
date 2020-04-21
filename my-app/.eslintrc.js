@@ -31,6 +31,7 @@ module.exports = {
     "import",
   ],
   rules: {
+    "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn", //Check effect dependencies
     "prettier/prettier": "error",

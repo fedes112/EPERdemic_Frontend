@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 
 const useInterval = (callback, predicate, delay) => {
-  const timeOut = () =>
-    setTimeout(() => {
+  const interval = () =>
+    setInterval(() => {
       if (predicate()) {
         callback();
       }
     }, delay);
 
   useEffect(() => {
-    const id = timeOut();
+    const id = interval();
     return () => clearInterval(id);
   });
 };

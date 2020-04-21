@@ -4,7 +4,6 @@ import { Form, Button, Card, Container } from "react-bootstrap";
 import { usePost, useGet } from "../../hooks/useFetch";
 import { enrichPathogen } from "../../commons/utils/pathogensUtils";
 import { BACKEND_SERVER, CLIENT_SERVER } from "../../commons/enums/enums";
-import "./pathogenForm.css";
 
 const PathogenForm = () => {
   const [groupName, setGroupName] = useState();
@@ -57,7 +56,7 @@ const PathogenForm = () => {
   };
 
   return (
-    <Container fluid className="pathogen-form">
+    <Container fluid>
       <Card className="text-center">
         <Card.Header />
         <Card.Body>

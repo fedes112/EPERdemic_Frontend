@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Card, Container } from "react-bootstrap";
 import { isEmpty } from "lodash";
-
 import "./pathogensList.css";
 
 const PathogenList = ({ pathogens }) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button, Card, Container } from "react-bootstrap";
-import { usePost, useGet } from "../../hooks/useFetch";
+import { usePost, useGet } from "../../commons/hooks/useFetch";
 import { enrichPathogen } from "../../commons/utils/pathogensUtils";
 import { BACKEND_SERVER, CLIENT_SERVER } from "../../commons/enums/enums";
 

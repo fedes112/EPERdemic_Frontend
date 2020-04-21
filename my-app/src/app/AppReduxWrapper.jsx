@@ -1,12 +1,16 @@
 import React from "react";
 import { Provider } from "react-redux";
 import stateContainer from "../redux/store";
-import BackendSynchronizer from "./backendSynchronizer";
+import BackendStoreSynchronizer from "./backendSynchronizer";
+import ClientStoreEnricher from "./clientStoreEnricher";
+import App from "./App";
 
 function AppReduxWrapper() {
   return (
     <Provider store={stateContainer}>
-      <BackendSynchronizer />
+      <BackendStoreSynchronizer />
+      <ClientStoreEnricher />
+      <App />
     </Provider>
   );
 }

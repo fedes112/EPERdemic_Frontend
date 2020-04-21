@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Form, Button, Card, Container } from "react-bootstrap";
-import { usePost, useGet } from "../../hooks/useFetch";
+import { usePost } from "../../commons/hooks/useFetch";
 import { enrichPathogen } from "../../commons/utils/pathogensUtils";
 import { BACKEND_SERVER, CLIENT_SERVER } from "../../commons/enums/enums";
 import "./pathogenForm.css";
 
-const PathogenForm = () => {
-  const [groupName, setGroupName] = useState();
-  const getGroupName = useGet(CLIENT_SERVER, "/group", setGroupName); // eslint-disable-line no-unused-vars
-
+const PathogenForm = ({ groupName }) => {
   const [pathogen, setPathogen] = useState();
   const [pathogenReturned, setPathogenReturned] = useState();
   const [pathogenEnriched, setPathogenEnriched] = useState();
@@ -30,9 +28,6 @@ const PathogenForm = () => {
     () => {},
     pathogenEnriched
   );
-  useEffect(() => {
-    getGroupName();
-  });
 
   useEffect(() => {
     if (!submitPathogen) return;
@@ -80,4 +75,8 @@ const PathogenForm = () => {
   );
 };
 
-export default PathogenForm;
+const mapStateToProps = (state) => ({
+  groupName: state.client.groupName,
+});
+
+export default connect(mapStateToProps)(PathogenForm);

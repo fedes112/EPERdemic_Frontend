@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { useStore } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Form, Button, Card, Container } from "react-bootstrap";
 import { usePost } from "../../commons/hooks/useFetch";
-import { enrichPathogen } from "../../commons/utils/pathogensUtils";
 import { BACKEND_SERVER, CLIENT_SERVER } from "../../commons/enums/enums";
 import "./pathogenForm.css";
 
-const PathogenForm = ({ groupName }) => {
+const useIdEnricher = () => {
+  const store = useStore();
+  const { groupName } = store.getState().client;
+  return (data) => ({
+    ...data,
+    id: { groupName, id: data.id },
+  });
+};
+
+const PathogenForm = () => {
   const [pathogen, setPathogen] = useState();
   const [pathogenReturned, setPathogenReturned] = useState();
   const [pathogenEnriched, setPathogenEnriched] = useState();
-
   const { register, handleSubmit, reset } = useForm();
   const [submitPathogen, setSubmitPathogen] = useState(false);
+  const idEnricher = useIdEnricher();
 
   const sendPathogen = usePost(
     CLIENT_SERVER,
@@ -33,13 +41,11 @@ const PathogenForm = ({ groupName }) => {
     if (!submitPathogen) return;
     sendPathogen();
     setSubmitPathogen(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submitPathogen]);
 
   useEffect(() => {
-    if (pathogenReturned)
-      setPathogenEnriched(enrichPathogen(pathogenReturned, groupName));
-  }, [groupName, pathogenReturned]);
+    if (pathogenReturned) setPathogenEnriched(idEnricher(pathogenReturned));
+  }, [pathogenReturned]);
 
   useEffect(() => {
     if (pathogenEnriched) sendPathogenBackend();
@@ -75,8 +81,4 @@ const PathogenForm = ({ groupName }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  groupName: state.client.groupName,
-});
-
-export default connect(mapStateToProps)(PathogenForm);
+export default PathogenForm;

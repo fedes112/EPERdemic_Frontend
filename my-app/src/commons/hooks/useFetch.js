@@ -2,8 +2,7 @@ import axios from "axios";
 
 const servers = Object.freeze({
   CLIENT_SERVER: "http://localhost:8080",
-  BACKEND_SERVER:
-    "https://cors-anywhere.herokuapp.com/http://eperdemic-backend.herokuapp.com",
+  BACKEND_SERVER: "http://eperdemic-backend.herokuapp.com",
 });
 
 const useFetch = (server, fetch, [path, setData = () => {}, body = {}]) => {

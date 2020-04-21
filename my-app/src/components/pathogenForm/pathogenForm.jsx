@@ -15,11 +15,10 @@ const useIdEnricher = () => {
   });
 };
 
-const PathogenForm = () => {
+const useStateAndForwardToServers = () => {
   const [pathogen, setPathogen] = useState();
   const [pathogenReturned, setPathogenReturned] = useState();
   const [pathogenEnriched, setPathogenEnriched] = useState();
-  const { register, handleSubmit, reset } = useForm();
   const [submitPathogen, setSubmitPathogen] = useState(false);
   const idEnricher = useIdEnricher();
 
@@ -50,6 +49,17 @@ const PathogenForm = () => {
   useEffect(() => {
     if (pathogenEnriched) sendPathogenBackend();
   }, [pathogenEnriched, sendPathogenBackend]);
+
+  return [pathogen, setPathogen, setSubmitPathogen];
+};
+
+const PathogenForm = () => {
+  const [
+    pathogen,
+    setPathogen,
+    setSubmitPathogen,
+  ] = useStateAndForwardToServers();
+  const { register, handleSubmit, reset } = useForm();
 
   const handleSendPathogen = (data) => {
     setPathogen({ ...pathogen, tipo: data.tipo });

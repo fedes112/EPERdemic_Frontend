@@ -1,18 +1,20 @@
 import React from "react";
 import { Provider } from "react-redux";
 import stateContainer from "../redux/store";
-import BackendStoreSynchronizer from "./backendSynchronizer";
-import ClientStoreEnricher from "./clientStoreEnricher";
 import App from "./App";
+import useBackendSynchronization from "../redux/enrichers/backendSynchHook";
+import useClientFetchedData from "../redux/enrichers/clientFetchedDataHook";
 
-function AppReduxWrapper() {
-  return (
-    <Provider store={stateContainer}>
-      <BackendStoreSynchronizer />
-      <ClientStoreEnricher />
-      <App />
-    </Provider>
-  );
-}
+const AppStoreEnricherWrapper = () => {
+  useBackendSynchronization();
+  useClientFetchedData();
+  return <App />;
+};
 
-export default AppReduxWrapper;
+const AppReduxProviderWrapper = () => (
+  <Provider store={stateContainer}>
+    <AppStoreEnricherWrapper />
+  </Provider>
+);
+
+export default AppReduxProviderWrapper;

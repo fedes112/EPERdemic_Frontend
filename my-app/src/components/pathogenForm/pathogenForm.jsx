@@ -1,69 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useStore } from "react-redux";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button, Card, Container } from "react-bootstrap";
-import { usePost } from "../../commons/hooks/useFetch";
-import { BACKEND_SERVER, CLIENT_SERVER } from "../../commons/enums/enums";
+import useStateAndForwardToServers from "../../commons/hooks/useStateAndFowrdardToServers";
 import "./pathogenForm.css";
 
-const useIdEnricher = () => {
-  const store = useStore();
-  const { groupName } = store.getState().client;
-  return (data) => ({
-    ...data,
-    id: { groupName, id: data.id },
-  });
-};
-
-const useStateAndForwardToServers = () => {
-  const [pathogen, setPathogen] = useState();
-  const [pathogenReturned, setPathogenReturned] = useState();
-  const [pathogenEnriched, setPathogenEnriched] = useState();
-  const [submitPathogen, setSubmitPathogen] = useState(false);
-  const idEnricher = useIdEnricher();
-
-  const sendPathogen = usePost(
-    CLIENT_SERVER,
-    "/patogeno",
-    setPathogenReturned,
-    pathogen
-  );
-
-  const sendPathogenBackend = usePost(
-    BACKEND_SERVER,
-    "/patogeno",
-    () => {},
-    pathogenEnriched
-  );
-
-  useEffect(() => {
-    if (!submitPathogen) return;
-    sendPathogen();
-    setSubmitPathogen(false);
-  }, [submitPathogen]);
-
-  useEffect(() => {
-    if (pathogenReturned) setPathogenEnriched(idEnricher(pathogenReturned));
-  }, [pathogenReturned]);
-
-  useEffect(() => {
-    if (pathogenEnriched) sendPathogenBackend();
-  }, [pathogenEnriched, sendPathogenBackend]);
-
-  return [pathogen, setPathogen, setSubmitPathogen];
-};
-
 const PathogenForm = () => {
-  const [
-    pathogen,
-    setPathogen,
-    setSubmitPathogen,
-  ] = useStateAndForwardToServers();
+  const [pathogen, setPathogen] = useStateAndForwardToServers("/patogeno");
   const { register, handleSubmit, reset } = useForm();
 
   const handleSendPathogen = (data) => {
     setPathogen({ ...pathogen, tipo: data.tipo });
-    setSubmitPathogen(true);
     reset();
   };
 

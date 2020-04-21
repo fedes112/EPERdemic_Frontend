@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card, Container } from "react-bootstrap";
-import { useGet } from "../hooks/useFetch";
-import { BACKEND_SERVER } from "../enums/enums.js";
 import { isEmpty } from "lodash";
+import { useGet } from "../../hooks/useFetch";
+import { BACKEND_SERVER } from "../../enums/enums";
+import "./pathogensList.css";
 
-export default () => {
+const PathogenList = () => {
   const [pathogens, setPathogens] = useState();
   const [getPatogenos, setGetPatogenos] = useState(false);
 
@@ -20,8 +21,8 @@ export default () => {
     setGetPatogenos(true);
   };
 
-  const pathongens_button = () => (
-    <Container fluid>
+  return (
+    <Container fluid className="pathogens-list">
       <Card className="text-center">
         <Card.Body>
           <Button
@@ -33,11 +34,13 @@ export default () => {
             Patógenos Actuales
           </Button>{" "}
           {!isEmpty(pathogens) &&
-            pathogens.map((pathogen) => <div>{pathogen.tipo}</div>)}
+            pathogens.map((pathogen) => (
+              <div key={pathogen.tipo}>{pathogen.tipo}</div>
+            ))}
         </Card.Body>
       </Card>
     </Container>
   );
-
-  return [pathogens, pathongens_button];
 };
+
+export default PathogenList;

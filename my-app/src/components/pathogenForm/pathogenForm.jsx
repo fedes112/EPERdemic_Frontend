@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button, Card, Container } from "react-bootstrap";
-import { usePost, useGet } from "../hooks/useFetch";
+import { usePost, useGet } from "../../hooks/useFetch";
+import { enrichPathogen } from "../../commons/pathogensUtils";
+import { BACKEND_SERVER, CLIENT_SERVER } from "../../enums/enums";
+import "./pathogenForm.css";
 
-import { BACKEND_SERVER, CLIENT_SERVER } from "../enums/enums.js";
-
-function Formulary() {
+const PathogenForm = () => {
   const [groupName, setGroupName] = useState();
   const getGroupName = useGet(CLIENT_SERVER, "/group", setGroupName); // eslint-disable-line no-unused-vars
 
@@ -53,21 +54,12 @@ function Formulary() {
     setPathogen({ ...pathogen, tipo: data.tipo });
     setSubmitPathogen(true);
     reset();
-    console.log(data);
-  };
-
-  const enrichPathogen = (pathogenReturned, groupName) => {
-    return {
-      patogenoId: { groupName: groupName, id: pathogenReturned.id },
-      cantidadDeEspecies: pathogenReturned.cantidadDeEspecies,
-      tipo: pathogenReturned.tipo,
-    };
   };
 
   return (
-    <Container fluid>
+    <Container fluid className="pathogen-form">
       <Card className="text-center">
-        <Card.Header></Card.Header>
+        <Card.Header />
         <Card.Body>
           <Form onSubmit={handleSubmit(handleSendPathogen)}>
             <Form.Group>
@@ -80,12 +72,12 @@ function Formulary() {
               Submit
             </Button>
           </Form>
-          <Card.Title></Card.Title>
+          <Card.Title />
         </Card.Body>
-        <Card.Footer className="text-muted"></Card.Footer>
+        <Card.Footer className="text-muted" />
       </Card>
     </Container>
   );
-}
+};
 
-export default Formulary;
+export default PathogenForm;

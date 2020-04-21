@@ -8,7 +8,6 @@ const servers = Object.freeze({
 
 const useFetch = (server, fetch, [path, setData = () => {}, body = {}]) => {
   const logError = (err) => {
-    console.error(err.response);
     throw err;
   };
 

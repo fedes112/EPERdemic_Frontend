@@ -1,53 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button, Card, Container } from "react-bootstrap";
-import { usePost } from "../../commons/hooks/useFetch";
-import { enrichPathogen } from "../../commons/utils/pathogensUtils";
-import { BACKEND_SERVER, CLIENT_SERVER } from "../../commons/enums/enums";
+import useStateAndForwardToServers from "../../commons/hooks/useStateAndFowrdardToServers";
 import "./pathogenForm.css";
 
-const PathogenForm = ({ groupName }) => {
-  const [pathogen, setPathogen] = useState();
-  const [pathogenReturned, setPathogenReturned] = useState();
-  const [pathogenEnriched, setPathogenEnriched] = useState();
-
+const PathogenForm = () => {
+  const [pathogen, setPathogen] = useStateAndForwardToServers("/patogeno");
   const { register, handleSubmit, reset } = useForm();
-  const [submitPathogen, setSubmitPathogen] = useState(false);
-
-  const sendPathogen = usePost(
-    CLIENT_SERVER,
-    "/patogeno",
-    setPathogenReturned,
-    pathogen
-  );
-
-  const sendPathogenBackend = usePost(
-    BACKEND_SERVER,
-    "/patogeno",
-    () => {},
-    pathogenEnriched
-  );
-
-  useEffect(() => {
-    if (!submitPathogen) return;
-    sendPathogen();
-    setSubmitPathogen(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [submitPathogen]);
-
-  useEffect(() => {
-    if (pathogenReturned)
-      setPathogenEnriched(enrichPathogen(pathogenReturned, groupName));
-  }, [groupName, pathogenReturned]);
-
-  useEffect(() => {
-    if (pathogenEnriched) sendPathogenBackend();
-  }, [pathogenEnriched, sendPathogenBackend]);
 
   const handleSendPathogen = (data) => {
     setPathogen({ ...pathogen, tipo: data.tipo });
-    setSubmitPathogen(true);
     reset();
   };
 
@@ -75,8 +37,4 @@ const PathogenForm = ({ groupName }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  groupName: state.client.groupName,
-});
-
-export default connect(mapStateToProps)(PathogenForm);
+export default PathogenForm;

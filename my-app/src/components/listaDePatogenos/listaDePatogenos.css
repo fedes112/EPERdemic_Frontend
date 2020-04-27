@@ -1,0 +1,25 @@
+.card {
+  width: -webkit-fill-available;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.dropdown-toggle {
+  width: -webkit-fill-available;
+  margin-bottom: 0.75rem;
+}
+
+.dropdown-menu.show {
+  width: -webkit-fill-available;
+}
+
+.list-group {
+  height: 60px;
+  overflow-y: scroll;
+}
+
+.list-group-flush .list-group-item {
+  padding: 0.1rem 0.1rem;
+}

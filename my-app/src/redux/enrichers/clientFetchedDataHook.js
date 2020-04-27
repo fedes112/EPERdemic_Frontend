@@ -1,5 +1,5 @@
 import { useGet } from "../../commons/hooks/useFetch";
-import useTimeout from "../../commons/hooks/useTimeOut";
+import useTimeout from "../../commons/hooks/useInterval";
 import { updateGroupName } from "../actions/clientGroupNameActions";
 import { CLIENT_SERVER } from "../../commons/enums/enums";
 import useFetchAndDispatch from "../../commons/hooks/useFetchAndDispatch";

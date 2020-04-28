@@ -1,17 +1,14 @@
 import React from "react";
-import { Card, DropdownButton, Dropdown, ListGroup } from "react-bootstrap";
+import { Card, ListGroup } from "react-bootstrap";
+import DropDownPatogenos from "../dropDownPatogenos/dropDownPatogenos";
 import "./listaDePatogenos.css";
 
 const ListaDePatogenos = () => {
   return (
-    <Card>
+    <Card className="m-2 shadow">
+      <Card.Header>Lista de Patogenos</Card.Header>
       <Card.Body>
-        <Card.Title>Lista de Patogenos</Card.Title>
-        <DropdownButton id="dropdown-basic-button" title="Patogenos">
-          <Dropdown.Item href="#/action-1">Hongo</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Virus</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Bacteria</Dropdown.Item>
-        </DropdownButton>
+        <DropDownPatogenos />
         <Card.Title>Especies</Card.Title>
         <ListGroup className="list-group-flush">
           <ListGroup.Item>Los Millones de Ronny</ListGroup.Item>

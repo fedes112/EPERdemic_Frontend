@@ -1,14 +1,15 @@
 import React from "react";
 import { Navbar } from "react-bootstrap";
-import "./eperdemicNavBar.css";
+import { faBiohazard } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function EPERdemicNavBar() {
   return (
-    <Navbar bg="dark" variant="dark">
-      <img
-        alt=""
-        src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-512.png"
-        className="d-inline-block align-top"
+    <Navbar bg="primary" variant="dark">
+      <FontAwesomeIcon
+        style={{ color: "white", paddingRight: "10px" }}
+        icon={faBiohazard}
+        size="2x"
       />
       <Navbar.Brand href="#home">NombreDelEquipo</Navbar.Brand>
       <Navbar.Brand href="#home">Rankings</Navbar.Brand>

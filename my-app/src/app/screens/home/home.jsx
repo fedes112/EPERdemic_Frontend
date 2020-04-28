@@ -10,8 +10,8 @@ import "./home.css";
 const Home = () => {
   return (
     <Container fluid>
-      <Row className="main-row">
-        <Col className="first-column" md="4">
+      <Row>
+        <Col md="4">
           <Row className="boton-simulacion-row">
             <BotonDeEmpezarSimulacion />
           </Row>
@@ -26,11 +26,11 @@ const Home = () => {
             </Col>
           </Row>
         </Col>
-        <Col md="8" className="second-column">
-          <Row className="second-column-row">
+        <Col md="8">
+          <Row>
             <AgregarPatogeno />
           </Row>
-          <Row className="second-column-row">
+          <Row>
             <AgregarEspecie />
           </Row>
         </Col>

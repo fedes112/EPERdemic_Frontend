@@ -1,9 +1,11 @@
 .App {
-  background-image: url(./resources/eperdemic2.jpg);
+  background-image: url(./resources/eperdemic3.jpg);
   position: fixed;
   width: 100%;
   height: 100%;
   background-size: cover;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .App-header {
@@ -19,4 +21,8 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.card {
+  border-color: gray !important;
 }

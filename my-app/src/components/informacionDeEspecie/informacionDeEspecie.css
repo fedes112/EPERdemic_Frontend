@@ -1,0 +1,19 @@
+.informacion-de-especie-text {
+  float: left;
+}
+
+.es-pandemia-container {
+  float: right;
+}
+
+img {
+  width: 20px;
+  height: 20px;
+  float: left;
+}
+
+.es-pandemia-text {
+  padding-left: 10px;
+  float: right;
+  color: #007bff;
+}

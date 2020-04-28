@@ -1,3 +1,13 @@
-.btn {
+.boton-empezar {
   width: -webkit-fill-available;
+  height: 90px;
+}
+
+.play-icon {
+  display: inline-block;
+}
+
+.empezar-text {
+  display: inline-block;
+  padding-left: 15px;
 }

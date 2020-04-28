@@ -6,17 +6,8 @@
   padding: 1rem;
 }
 
-.dropdown-toggle {
-  width: -webkit-fill-available;
-  margin-bottom: 0.75rem;
-}
-
-.dropdown-menu.show {
-  width: -webkit-fill-available;
-}
-
 .list-group {
-  height: 60px;
+  height: 80px;
   overflow-y: scroll;
 }
 

@@ -25,6 +25,7 @@
 
 .card {
   border-color: gray !important;
+  width: -webkit-fill-available;
 }
 
 .row {

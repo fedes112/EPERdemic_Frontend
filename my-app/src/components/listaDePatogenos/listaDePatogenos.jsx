@@ -10,7 +10,7 @@ const ListaDePatogenos = () => {
       <Card.Body>
         <DropDownPatogenos />
         <Card.Title>Especies</Card.Title>
-        <ListGroup className="list-group-flush">
+        <ListGroup className="list-group-flush list-group-patogenos">
           <ListGroup.Item>Los Millones de Ronny</ListGroup.Item>
           <ListGroup.Item>Tobias</ListGroup.Item>
           <ListGroup.Item>Gripe</ListGroup.Item>

@@ -1,12 +1,4 @@
-.card {
-  width: -webkit-fill-available;
-}
-
-.card-body {
-  padding: 1rem;
-}
-
-.list-group {
+.list-group-patogenos {
   height: 80px;
   overflow-y: scroll;
 }

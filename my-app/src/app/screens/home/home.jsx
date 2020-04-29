@@ -12,7 +12,7 @@ const Home = () => {
     <Container fluid>
       <Row>
         <Col md="4">
-          <Row className="boton-simulacion-row">
+          <Row style={{ alignContent: "center" }}>
             <BotonDeEmpezarSimulacion />
           </Row>
           <Row id="informacion-de-patogenos-row">

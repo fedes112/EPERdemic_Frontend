@@ -26,3 +26,7 @@
 .card {
   border-color: gray !important;
 }
+
+.row {
+  padding: 0.3rem;
+}

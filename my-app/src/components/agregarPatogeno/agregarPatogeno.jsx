@@ -10,53 +10,15 @@ import {
   faHorseHead,
   faSpider,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Virus from "./resources/virus.png";
-
-const Slide = ({ labelText, minusIcon, plusIcon }) => {
-  return (
-    <Form.Group
-      as={Row}
-      style={{
-        marginBottom: "0px",
-      }}
-      controlId="formPlaintextPassword"
-    >
-      <Col style={{ alignSelf: "flex-end" }} md="5">
-        <Form.Label className="text-muted">{labelText}</Form.Label>
-      </Col>
-      <Col md="7">
-        <div
-          style={{
-            display: "inline-flex",
-            width: "-webkit-fill-available",
-          }}
-        >
-          <FontAwesomeIcon style={{ color: "#007bff" }} icon={minusIcon} />
-          <Form.Control
-            style={{
-              paddingRight: "15px",
-              paddingLeft: "15px",
-              paddingBottom: "0px",
-              width: "-webkit-fill-available",
-            }}
-            type="range"
-            className="custom-range"
-            id="customRange1"
-          />
-          <FontAwesomeIcon style={{ color: "#007bff" }} icon={plusIcon} />
-        </div>
-      </Col>
-    </Form.Group>
-  );
-};
+import SlideDeAtributo from "./slideDeAtributo/slideDeAtributo";
 
 const AgregarPatogeno = () => {
   return (
     <Card className="m-2 shadow-2">
       <Card.Header>Agregar Patogeno</Card.Header>
       <Card.Body>
-        <Form>
+        <Form className="px-2">
           <Form.Group
             style={{
               marginBottom: "0px",
@@ -85,27 +47,27 @@ const AgregarPatogeno = () => {
                   </Col>
                 </div>
               </Row>
-              <Slide
+              <SlideDeAtributo
                 labelText="Contagio Personas"
                 minusIcon={faHeadSideCoughSlash}
                 plusIcon={faHeadSideCough}
               />
-              <Slide
+              <SlideDeAtributo
                 labelText="Contagio Animales"
                 minusIcon={faHorseHead}
                 plusIcon={faHorseHead}
               />
-              <Slide
+              <SlideDeAtributo
                 labelText="Contagio Insectos"
                 minusIcon={faSpider}
                 plusIcon={faSpider}
               />
-              <Slide
+              <SlideDeAtributo
                 labelText="Defensa"
                 minusIcon={faShieldAlt}
                 plusIcon={faShieldVirus}
               />
-              <Slide
+              <SlideDeAtributo
                 labelText="Letalidad"
                 minusIcon={faVirusSlash}
                 plusIcon={faVirus}

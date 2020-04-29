@@ -36,15 +36,19 @@ const AgregarEspecieHeader = () => {
 const AgregarEspecieBody = () => {
   return (
     <Card.Body>
-      <FormNombreDeLaEspecie />
-      <FormUbicacionDeOrigen />
+      <Row>
+        <FormNombreDeLaEspecie />
+      </Row>
+      <Row>
+        <FormUbicacionDeOrigen />
+      </Row>
     </Card.Body>
   );
 };
 
 const FormNombreDeLaEspecie = () => {
   return (
-    <Row>
+    <>
       <Col style={{ alignSelf: "flex-end" }} md="2">
         <Form.Label>Nombre de Especie</Form.Label>
       </Col>
@@ -55,13 +59,13 @@ const FormNombreDeLaEspecie = () => {
           placeholder="Nombre de Especie"
         />
       </Col>
-    </Row>
+    </>
   );
 };
 
 const FormUbicacionDeOrigen = () => {
   return (
-    <Row>
+    <>
       <Col style={{ alignSelf: "flex-end" }} md="2">
         <Form.Label>Lugar</Form.Label>
       </Col>
@@ -72,7 +76,7 @@ const FormUbicacionDeOrigen = () => {
           <option>La casa de Lucas</option>
         </Form.Control>
       </Col>
-    </Row>
+    </>
   );
 };
 

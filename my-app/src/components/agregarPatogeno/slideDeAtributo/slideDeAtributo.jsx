@@ -9,23 +9,23 @@ const SlideDeAtributo = ({ labelText, minusIcon, plusIcon }) => {
       style={{ marginBottom: "0px" }}
       controlId="formPlaintextPassword"
     >
-      <SlideLabel labelText={labelText} />
-      <SlideForm minusIcon={minusIcon} plusIcon={plusIcon} />
+      <Col style={{ alignSelf: "flex-end" }} md="5">
+        <SlideLabel labelText={labelText} />
+      </Col>
+      <Col style={{ display: "inline-flex" }} md="7">
+        <SlideForm minusIcon={minusIcon} plusIcon={plusIcon} />
+      </Col>
     </Form.Group>
   );
 };
 
 const SlideLabel = ({ labelText }) => {
-  return (
-    <Col style={{ alignSelf: "flex-end" }} md="5">
-      <Form.Label className="text-muted">{labelText}</Form.Label>
-    </Col>
-  );
+  return <Form.Label className="text-muted">{labelText}</Form.Label>;
 };
 
 const SlideForm = ({ minusIcon, plusIcon }) => {
   return (
-    <Col md="7" style={{ display: "inline-flex" }}>
+    <>
       <FontAwesomeIcon style={{ color: "#007bff" }} icon={minusIcon} />
       <Form.Control
         type="range"
@@ -33,7 +33,7 @@ const SlideForm = ({ minusIcon, plusIcon }) => {
         id="customRange1"
       />
       <FontAwesomeIcon style={{ color: "#007bff" }} icon={plusIcon} />
-    </Col>
+    </>
   );
 };
 

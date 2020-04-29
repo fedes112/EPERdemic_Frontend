@@ -12,30 +12,47 @@ const Home = () => {
     <Container fluid>
       <Row>
         <Col md="4">
-          <Row style={{ alignContent: "center" }}>
-            <BotonDeEmpezarSimulacion />
-          </Row>
-          <Row id="informacion-de-patogenos-row">
-            <Col>
-              <Row className="lista-de-patogenos-row">
-                <ListaDePatogenos />
-              </Row>
-              <Row className="informacion-de-especie-row">
-                <InformacionDeEspecie />
-              </Row>
-            </Col>
-          </Row>
+          <FirstColumn />
         </Col>
         <Col md="8">
-          <Row>
-            <AgregarPatogeno />
-          </Row>
-          <Row>
-            <AgregarEspecie />
-          </Row>
+          <SecondColumn />
         </Col>
       </Row>
     </Container>
+  );
+};
+
+const FirstColumn = () => {
+  return (
+    <>
+      <Row style={{ alignContent: "center" }}>
+        <BotonDeEmpezarSimulacion />
+      </Row>
+
+      <Row id="informacion-de-patogenos-row">
+        <Col>
+          <Row className="lista-de-patogenos-row">
+            <ListaDePatogenos />
+          </Row>
+          <Row className="informacion-de-especie-row">
+            <InformacionDeEspecie />
+          </Row>
+        </Col>
+      </Row>
+    </>
+  );
+};
+
+const SecondColumn = () => {
+  return (
+    <>
+      <Row>
+        <AgregarPatogeno />
+      </Row>
+      <Row>
+        <AgregarEspecie />
+      </Row>
+    </>
   );
 };
 

@@ -8,7 +8,7 @@ const BotonDeEmpezarSimulacion = () => {
   return (
     <Button className="m-2 shadow boton-empezar" variant="primary">
       <div style={{ paddingRight: "30px" }}>
-        <FontAwesomeIcon className="play-icon" icon={faPlay} size="2x" />
+        <FontAwesomeIcon icon={faPlay} size="2x" />
         <h3 className="empezar-text">Empezar simulación</h3>
       </div>
     </Button>

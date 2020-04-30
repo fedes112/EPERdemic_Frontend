@@ -1,0 +1,9 @@
+.boton-empezar {
+  width: -webkit-fill-available;
+  height: 90px;
+}
+
+.empezar-text {
+  display: inline-block;
+  padding-left: 15px;
+}

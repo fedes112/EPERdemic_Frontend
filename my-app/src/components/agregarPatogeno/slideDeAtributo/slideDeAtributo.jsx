@@ -4,11 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SlideDeAtributo = ({ labelText, minusIcon, plusIcon }) => {
   return (
-    <Form.Group
-      as={Row}
-      style={{ marginBottom: "0px" }}
-      controlId="formPlaintextPassword"
-    >
+    <Form.Group as={Row} style={{ marginBottom: "0px" }}>
       <Col style={{ alignSelf: "flex-end" }} md="5">
         <SlideLabel labelText={labelText} />
       </Col>

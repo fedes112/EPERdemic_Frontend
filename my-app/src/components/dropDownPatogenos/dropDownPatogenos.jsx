@@ -12,7 +12,7 @@ const DropDownPatogenos = ({ pathogens }) => {
       title="Patogenos"
     >
       {pathogens.map((pathogen) => (
-        <Dropdown.Item href={`#/${pathogen.tipo}`}>
+        <Dropdown.Item key={pathogen} href={`#/${pathogen.tipo}`}>
           {pathogen.tipo}
         </Dropdown.Item>
       ))}

@@ -30,11 +30,7 @@ const AgregarPatogeno = () => {
       <Card.Header>Agregar Patogeno</Card.Header>
       <Card.Body>
         <Form className="px-2" onSubmit={handleSubmit(handleSendPathogen)}>
-          <Form.Group
-            style={{ marginBottom: "0px" }}
-            as={Row}
-            controlId="formPlaintextPassword"
-          >
+          <Form.Group style={{ marginBottom: "0px" }} as={Row}>
             <Col md="7">
               <AgregarPatogenoForm registro={register} />
             </Col>

@@ -1,8 +1,9 @@
 import React from "react";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import "./dropDownPatogenos.css";
+import { connect } from "react-redux";
 
-const DropDownPatogenos = () => {
+const DropDownPatogenos = ({ pathogens }) => {
   return (
     <DropdownButton
       className="dropdown-pathogen-button"
@@ -10,11 +11,17 @@ const DropDownPatogenos = () => {
       id="dropdown-basic-button"
       title="Patogenos"
     >
-      <Dropdown.Item href="#/action-1">Hongo</Dropdown.Item>
-      <Dropdown.Item href="#/action-2">Virus</Dropdown.Item>
-      <Dropdown.Item href="#/action-3">Bacteria</Dropdown.Item>
+      {pathogens.map((pathogen) => (
+        <Dropdown.Item href={`#/${pathogen.tipo}`}>
+          {pathogen.tipo}
+        </Dropdown.Item>
+      ))}
     </DropdownButton>
   );
 };
 
-export default DropDownPatogenos;
+const mapStateToProps = (state) => ({
+  pathogens: state.client.pathogens,
+});
+
+export default connect(mapStateToProps)(DropDownPatogenos);

@@ -6,13 +6,13 @@ import useFetchAndDispatch from "../../commons/hooks/useFetchAndDispatch";
 
 const CALL_ALWAYS = () => true;
 
-const useSyncBackendToStore = (path, action) => {
+const useSyncBackendToStore = (path, action, timedFunction) => {
   const getAndSync = useFetchAndDispatch(useGet, BACKEND_SERVER, path, action);
-  useInterval(getAndSync, CALL_ALWAYS, 5000);
+  timedFunction(getAndSync, CALL_ALWAYS, 5000);
 };
 
 const useBackendSynchronization = () => {
-  useSyncBackendToStore("/patogeno", updatePathogens);
+  useSyncBackendToStore("/patogeno", updatePathogens, useInterval);
 };
 
 export default useBackendSynchronization;

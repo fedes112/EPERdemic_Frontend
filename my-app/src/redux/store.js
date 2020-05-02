@@ -10,6 +10,6 @@ const rootReducer = combineReducers({
   client: clientReducer,
 });
 
-const stateContainer = createStore(rootReducer, applyMiddleware(logger));
-
+const stateContainer = createStore(rootReducer);
+// , applyMiddleware(logger)
 export default stateContainer;

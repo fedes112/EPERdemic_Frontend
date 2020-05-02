@@ -5,6 +5,7 @@ import AgregarPatogenoForm from "./agregarPatogenoForm/agregarPatogenoForm";
 import { usePost } from "../../commons/hooks/useFetch";
 import { CLIENT_SERVER } from "../../commons/enums/enums";
 import { useForm } from "react-hook-form";
+import { isEmpty } from "lodash";
 
 const AgregarPatogeno = () => {
   const [pathogen, setPathogen] = useState({});
@@ -15,11 +16,14 @@ const AgregarPatogeno = () => {
     reset();
   };
 
-  useEffect(() => {
-    sendPathogen(pathogen);
-  }, [pathogen]);
+  const sendPathogen = usePost(CLIENT_SERVER, "/patogeno", () => {}, pathogen);
 
-  const sendPathogen = usePost(CLIENT_SERVER, "/patogeno", pathogen);
+  useEffect(() => {
+    if (!isEmpty(pathogen)) {
+      console.log("SENDING DATA:", pathogen);
+      sendPathogen();
+    }
+  }, [pathogen]);
 
   return (
     <Card className="m-2 shadow-2">

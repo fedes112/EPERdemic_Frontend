@@ -12,6 +12,7 @@ const useFetch = (server, fetch, [path, setData = () => {}, body = {}]) => {
   const logError = (err) => {
     throw err;
   };
+  console.log()
 
   const URL = () => `${servers[server]}${path}`;
   return () =>

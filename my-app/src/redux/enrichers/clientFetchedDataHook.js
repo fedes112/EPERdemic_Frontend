@@ -10,7 +10,7 @@ const CALL_ALWAYS = () => true;
 
 const useFetchClientDataToStore = (path, action, timedFunction) => {
   const getAndEnrich = useFetchAndDispatch(useGet, CLIENT_SERVER, path, action);
-  timedFunction(getAndEnrich, CALL_ALWAYS, 1);
+  timedFunction(getAndEnrich, CALL_ALWAYS, 5000);
 };
 
 const useClientFetchedData = () => {

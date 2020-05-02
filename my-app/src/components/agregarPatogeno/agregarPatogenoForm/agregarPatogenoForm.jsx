@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import SlideDeAtributo from "../slideDeAtributo/slideDeAtributo";
 
-const AgregarPatogenoForm = ({ seteoPatogeno, registro }) => {
+const AgregarPatogenoForm = ({ registro }) => {
   return (
     <>
       <Row>
@@ -33,7 +33,6 @@ const AgregarPatogenoForm = ({ seteoPatogeno, registro }) => {
               style={{ width: "-webkit-fill-available" }}
               type="text"
               placeholder="Tipo de Patogeno"
-              onChange={(value) => console.log(value)}
             />
           </Col>
         </div>

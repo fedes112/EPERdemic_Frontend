@@ -8,42 +8,31 @@ import { useForm } from "react-hook-form";
 
 const AgregarPatogeno = () => {
   const [pathogen, setPathogen] = useState({});
-  const [send, setSend] = useState(false);
   const { register, handleSubmit, reset } = useForm();
 
-  const handleSendPathogen = () => {
-    setSend(true);
+  const handleSendPathogen = (data) => {
+    setPathogen({ ...pathogen, tipo: data.tipo });
+    reset();
   };
 
-  const sendPathogen = usePost(CLIENT_SERVER, "/patogeno", pathogen);
-
   useEffect(() => {
-    if (send) {
-      console.log(pathogen, "AYUDAAAAAAAAA");
-      alert(pathogen);
-      console.log(pathogen, "AYUDAAAAAAAAA");
-      sendPathogen();
-      setSend(false);
-    }
-  }, [send]);
+    sendPathogen(pathogen);
+  }, [pathogen]);
+
+  const sendPathogen = usePost(CLIENT_SERVER, "/patogeno", pathogen);
 
   return (
     <Card className="m-2 shadow-2">
       <Card.Header>Agregar Patogeno</Card.Header>
       <Card.Body>
-        <Form className="px-2" handleSubmit={handleSendPathogen}>
+        <Form className="px-2" onSubmit={handleSubmit(handleSendPathogen)}>
           <Form.Group
             style={{ marginBottom: "0px" }}
             as={Row}
             controlId="formPlaintextPassword"
           >
             <Col md="7">
-              <AgregarPatogenoForm
-                seteoPatogeno={(tipo) =>
-                  setPathogen({ ...pathogen, tipo: tipo })
-                }
-                regitro={register}
-              />
+              <AgregarPatogenoForm registro={register} />
             </Col>
             <Col md="5">
               <ImagenVirus />

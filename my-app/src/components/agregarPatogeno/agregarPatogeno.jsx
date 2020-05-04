@@ -12,7 +12,15 @@ const AgregarPatogeno = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const handleSendPathogen = (data) => {
-    setPathogen({ ...pathogen, tipo: data.tipo });
+    setPathogen({
+      ...pathogen,
+      tipo: data.tipo,
+      capacidadContagioPersona: data.capacidadContagioPersona,
+      capacidadContagioInsectos: data.capacidadContagioInsectos,
+      capacidadContagioAnimal: data.capacidadContagioAnimal,
+      defensa: data.defensa,
+      letalidad: data.letalidad,
+    });
     reset();
   };
 
@@ -32,7 +40,7 @@ const AgregarPatogeno = () => {
         <Form className="px-2" onSubmit={handleSubmit(handleSendPathogen)}>
           <Form.Group style={{ marginBottom: "0px" }} as={Row}>
             <Col md="7">
-              <AgregarPatogenoForm registro={register} />
+              <AgregarPatogenoForm register={register} />
             </Col>
             <Col md="5">
               <ImagenVirus />

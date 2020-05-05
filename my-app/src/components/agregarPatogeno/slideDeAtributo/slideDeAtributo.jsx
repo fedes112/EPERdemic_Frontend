@@ -27,25 +27,20 @@ const SlideLabel = ({ labelText }) => {
 const SlideForm = ({ minusIcon, plusIcon, register, labelText }) => {
   let name;
   switch (labelText) {
-    case labelText === "Contagio Personas":
+    case "Contagio Personas":
       name = "capacidadContagioPersona";
-      console.log(name);
       break;
-    case labelText === "Contagio Animales":
-      name = "contagioIncapacidadContagioInsectosectos";
-      console.log(name);
+    case "Contagio Animales":
+      name = "capacidadContagioInsectos";
       break;
-    case labelText === "Contagio Insectos":
+    case "Contagio Insectos":
       name = "capacidadContagioAnimal";
-      console.log(name);
       break;
-    case labelText === "Defensa":
+    case "Defensa":
       name = "defensa";
-      console.log(name);
       break;
-    case labelText === "Letalidad":
+    case "Letalidad":
       name = "letalidad";
-      console.log(name);
       break;
     default:
       name = "Error";

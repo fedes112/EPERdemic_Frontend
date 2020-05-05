@@ -29,7 +29,9 @@ const AgregarPatogeno = () => {
   useEffect(() => {
     if (!isEmpty(pathogen)) {
       console.log("SENDING DATA:", pathogen);
-      sendPathogen();
+      sendPathogen()
+        //.catch(alert("Error"))
+        .then(alert(`Patogeno de tipo ${pathogen.tipo} insertado`));
     }
   }, [pathogen]);
 

@@ -37,7 +37,7 @@ const AgregarPatogenoForm = ({ register }) => {
           </Col>
         </div>
       </Row>
-      <SlidesAtributo registro={register} />
+      <SlidesAtributo register={register} />
     </>
   );
 };

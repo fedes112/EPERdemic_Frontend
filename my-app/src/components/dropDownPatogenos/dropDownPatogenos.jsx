@@ -3,7 +3,7 @@ import { DropdownButton, Dropdown } from "react-bootstrap";
 import "./dropDownPatogenos.css";
 import { connect } from "react-redux";
 
-const DropDownPatogenos = ({ pathogens }) => {
+const DropDownPatogenos = ({ pathogens, register, setValue }) => {
   return (
     <DropdownButton
       className="dropdown-pathogen-button"
@@ -11,8 +11,14 @@ const DropDownPatogenos = ({ pathogens }) => {
       id="dropdown-basic-button"
       title="Patogenos"
     >
-      {pathogens.map((pathogen) => (
-        <Dropdown.Item key={pathogen} href={`#/${pathogen.tipo}`}>
+      {pathogens.map((pathogen, index) => (
+        <Dropdown.Item
+          key={(pathogen, index)}
+          ref={register}
+          name="patogeno"
+          eventKey={pathogen.tipo}
+          onSelect={(tipo) => setValue("patogeno", tipo)}
+        >
           {pathogen.tipo}
         </Dropdown.Item>
       ))}

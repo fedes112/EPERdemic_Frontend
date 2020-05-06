@@ -16,10 +16,10 @@ const DropDownPatogenos = ({ pathogens, register, setValue }) => {
           key={(pathogen, index)}
           ref={register}
           name="patogeno"
-          eventKey={pathogen.tipo}
+          eventKey={pathogen.id}
           onSelect={(tipo) => setValue("patogeno", tipo)}
         >
-          {pathogen.tipo}
+          <option value={pathogen}>{pathogen.tipo}</option>
         </Dropdown.Item>
       ))}
     </DropdownButton>

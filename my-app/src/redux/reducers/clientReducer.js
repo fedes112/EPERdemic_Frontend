@@ -1,10 +1,14 @@
 import deepFreezeStrict from "deep-freeze-strict";
 import { UPDATE_GROUP_NAME_CLIENT } from "../actions/clientGroupNameActions";
-import { UPDATE_PATHOGENS_CLIENT } from "../actions/clientPathogensActions";
+import {
+  UPDATE_PATHOGENS_CLIENT,
+  UPDATE_UBICACION_CLIENT,
+} from "../actions/clientPathogensActions";
 
 const clientState = {
   groupName: {},
   pathogens: [],
+  ubicaciones: [],
 };
 
 const clientReducer = (state = clientState, action) => {
@@ -15,6 +19,9 @@ const clientReducer = (state = clientState, action) => {
       break;
     case UPDATE_PATHOGENS_CLIENT:
       newState = { ...state, pathogens: action.pathogens };
+      break;
+    case UPDATE_UBICACION_CLIENT:
+      newState = { ...state, ubicaciones: action.ubicaciones };
       break;
     default:
       return state;

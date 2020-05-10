@@ -1,7 +1,10 @@
 import { useGet } from "../../commons/hooks/useFetch";
 import useTimeout from "../../commons/hooks/useInterval";
 import { updateGroupName } from "../actions/clientGroupNameActions";
-import { updatePathogensList } from "../actions/clientPathogensActions";
+import {
+  updatePathogensList,
+  updateUbicacionList,
+} from "../actions/clientPathogensActions";
 import { CLIENT_SERVER } from "../../commons/enums/enums";
 import useFetchAndDispatch from "../../commons/hooks/useFetchAndDispatch";
 import useInterval from "../../commons/hooks/useInterval";
@@ -16,6 +19,7 @@ const useFetchClientDataToStore = (path, action, timedFunction) => {
 const useClientFetchedData = () => {
   useFetchClientDataToStore("/patogeno", updatePathogensList, useInterval);
   useFetchClientDataToStore("/group", updateGroupName, useTimeout);
+  useFetchClientDataToStore("/ubicacion", updateUbicacionList, useTimeout);
 };
 
 export default useClientFetchedData;

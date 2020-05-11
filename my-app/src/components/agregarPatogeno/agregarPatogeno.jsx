@@ -24,14 +24,19 @@ const AgregarPatogeno = () => {
     reset();
   };
 
-  const sendPathogen = usePost(CLIENT_SERVER, "/patogeno", () => {}, pathogen);
+  const sendPathogen = usePost(
+    CLIENT_SERVER,
+    "Se creo el patogeno con exito",
+    "Hubo un problema creando el patogeno D:",
+    "/patogeno",
+    () => {},
+    pathogen
+  );
 
   useEffect(() => {
     if (!isEmpty(pathogen)) {
       console.log("SENDING DATA:", pathogen);
-      sendPathogen()
-        //.catch(alert("Error"))
-        .then(alert(`Patogeno de tipo ${pathogen.tipo} insertado`));
+      sendPathogen();
     }
   }, [pathogen]);
 

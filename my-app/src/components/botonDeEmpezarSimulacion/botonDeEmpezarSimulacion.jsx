@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import "./botonDeEmpezarSimulacion.css";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "react-toastify/dist/ReactToastify.css";
 
 const BotonDeEmpezarSimulacion = () => {
   return (

@@ -32,6 +32,8 @@ const AgregarEspecie = ({ ubicaciones }) => {
 
   const sendEspecie = usePost(
     CLIENT_SERVER,
+    "Se creo la especie con exito",
+    "Hubo un problema creando la especie D:",
     `/patogeno/${especie.patogeno}`,
     () => {},
     especie
@@ -40,9 +42,7 @@ const AgregarEspecie = ({ ubicaciones }) => {
   useEffect(() => {
     if (!isEmpty(especie)) {
       console.log("SENDING DATA:", especie);
-      sendEspecie()
-        //.catch(alert("Error"))
-        .then(alert(`Especie insertada`));
+      sendEspecie();
     }
   }, [especie]);
 

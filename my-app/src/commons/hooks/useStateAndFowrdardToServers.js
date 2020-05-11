@@ -10,10 +10,19 @@ const useStateAndForwardToServers = (path) => {
   const [dataIdEnriched, setDataIdEnriched] = useState();
   const idEnricher = useIdEnricher();
 
-  const sendData = usePost(CLIENT_SERVER, path, setDataReturned, data);
+  const sendData = usePost(
+    CLIENT_SERVER,
+    "successMessage",
+    "errorMessage",
+    path,
+    setDataReturned,
+    data
+  );
 
   const sendDataToBackend = usePost(
     BACKEND_SERVER,
+    "successMessage",
+    "errorMessage",
     path,
     () => {},
     dataIdEnriched

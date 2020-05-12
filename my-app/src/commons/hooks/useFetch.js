@@ -22,7 +22,6 @@ const useFetch = (
     toast.error(msgOnError);
     throw err;
   };
-  console.log();
 
   const toastSuccess = (msg) => {
     if (msg !== NO_SUCCESS_MESSAGE) toast(msg);

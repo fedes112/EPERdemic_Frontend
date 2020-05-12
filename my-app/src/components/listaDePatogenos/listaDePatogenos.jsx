@@ -1,24 +1,23 @@
-import React, { useState } from "react";
-import { Card, ListGroup } from "react-bootstrap";
-import DropDownPatogenos from "../dropDownPatogenos/dropDownPatogenos";
+import React, { useState, useEffect } from "react";
+import { Card, ListGroup, Form, Button } from "react-bootstrap";
+import DropDownPatogenos from "../dropDownPatogenos/dropDownPatogenosSelect";
 import "./listaDePatogenos.css";
 import { connect } from "react-redux";
+import { useForm } from "react-hook-form";
+import { useGet } from "../../commons/hooks/useFetch";
+import { CLIENT_SERVER } from "../../commons/enums/enums";
 
-const ListGroupDeEspecies = ({ pathogens }) => {
-  const [patogenoSeleccionado, setPatogenoSeleccionado] = useState(-1);
-
+const ListGroupDeEspecies = ({ listaEspecies }) => {
   return (
     <ListGroup className="list-group-flush list-group-especies">
-      {patogenoSeleccionado !== -1 ? (
-        <div>
-          {pathogens
-            .find(patogenoSeleccionado)
-            .especies.map((especie, index) => (
-              <ListGroup.Item>{especie}}</ListGroup.Item>
-            ))}
-        </div>
+      {listaEspecies.length === 0 ? (
+        <ListGroup.Item>No tiene especies!</ListGroup.Item>
       ) : (
-        <ListGroup.Item>Apex Legends</ListGroup.Item>
+        <div>
+          {listaEspecies.map((especie, index) => (
+            <ListGroup.Item>{especie.nombre}</ListGroup.Item>
+          ))}
+        </div>
       )}
     </ListGroup>
   );
@@ -26,15 +25,57 @@ const ListGroupDeEspecies = ({ pathogens }) => {
 
 const ListaDePatogenos = () => {
   const [patogenoSeleccionado, setPatogenoSeleccionado] = useState(-1);
+  const [especies, setEspecies] = useState([]);
+  const { register, handleSubmit, reset, setValue } = useForm();
+  console.log("AYUDAAAAAAAAAAA");
+  console.log(`/especie/${patogenoSeleccionado.patogenoSeleccionado}`);
+  console.log(patogenoSeleccionado);
+  console.log(especies);
+
+  const handleSelectEspecie = (data) => {
+    setPatogenoSeleccionado({
+      ...patogenoSeleccionado,
+      patogenoSeleccionado: data.patogenoSeleccionado,
+    });
+    reset();
+  };
+
+  useEffect(() => {
+    if (patogenoSeleccionado !== undefined && patogenoSeleccionado !== -1) {
+      console.log("Getting DATA:", patogenoSeleccionado);
+      getEspecies();
+    }
+  }, [patogenoSeleccionado]);
+
+  const getEspecies = useGet(
+    CLIENT_SERVER,
+    "Solicitud mandada",
+    "Hubo un problema con la solicitud D:",
+    `/especie/${patogenoSeleccionado.patogenoSeleccionado}`,
+    setEspecies
+  );
 
   return (
     <Card className="m-2 shadow">
       <Card.Header>Lista de Patogenos</Card.Header>
-      <Card.Body>
-        <DropDownPatogenos />
-        <Card.Title>Especies</Card.Title>
-        <ListGroupDeEspecies />
-      </Card.Body>
+      <Form className="px-2" onSubmit={handleSubmit(handleSelectEspecie)}>
+        <Card.Body>
+          <DropDownPatogenos register={register} setValue={setValue} />
+          <Card.Title>Especies</Card.Title>
+          <ListGroupDeEspecies listaEspecies={especies || []} />
+          <Button
+            style={{
+              paddingRight: "50px",
+              marginTop: "15px",
+              width: "-webkit-fill-available",
+            }}
+            variant="primary"
+            type="submit"
+          >
+            ¡ Buscar Especie !
+          </Button>
+        </Card.Body>
+      </Form>
     </Card>
   );
 };

@@ -1,4 +1,9 @@
-import { useGet, NO_SUCCESS_MESSAGE } from "../../commons/hooks/useFetch";
+import { useStore } from "react-redux";
+import {
+  useGet,
+  usePut,
+  NO_SUCCESS_MESSAGE,
+} from "../../commons/hooks/useFetch";
 import { updateGroupName } from "../actions/clientGroupNameActions";
 import {
   updatePathogensList,
@@ -32,7 +37,7 @@ const useFetchClientDataToStore = (
   }
 };
 
-const useClientFetchedData = () => {
+const useClientDataSynchronization = () => {
   useFetchClientDataToStore(
     "/patogeno",
     updatePathogensList,
@@ -54,4 +59,35 @@ const useClientFetchedData = () => {
   );
 };
 
-export default useClientFetchedData;
+const useIntervalCallsToClient = () => {
+  const store = useStore();
+  const callOnlyIfSimulationStarted = () => store.getState().simulation.started;
+
+  useInterval(
+    usePut(
+      CLIENT_SERVER,
+      NO_SUCCESS_MESSAGE,
+      "No se pudo pedir movimiento de vectores al cliente backend",
+      "/ubicacion/moverVectorRandom"
+    ),
+    callOnlyIfSimulationStarted,
+    5000
+  );
+  useInterval(
+    usePut(
+      CLIENT_SERVER,
+      NO_SUCCESS_MESSAGE,
+      "No se pudo pedir expansion de especies al cliente backend",
+      "/ubicacion/expandir"
+    ),
+    callOnlyIfSimulationStarted,
+    5000
+  );
+};
+
+const useClientSynchronization = () => {
+  useClientDataSynchronization();
+  useIntervalCallsToClient();
+};
+
+export default useClientSynchronization;

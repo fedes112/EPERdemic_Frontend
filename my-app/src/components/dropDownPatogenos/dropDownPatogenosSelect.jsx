@@ -16,9 +16,9 @@ const DropDownPatogenos = ({ pathogens, register, setValue }) => {
         <Dropdown.Item
           key={(pathogen, index)}
           ref={register}
-          name="patogeno"
+          name="patogenoSeleccionado"
           eventKey={pathogen.id}
-          onSelect={(tipo) => setValue("patogeno", tipo)}
+          onSelect={(tipo) => setValue("patogenoSeleccionado", tipo)}
         >
           <option value={pathogen}>{pathogen.tipo}</option>
         </Dropdown.Item>

@@ -1,4 +1,8 @@
-import { useGet, NO_SUCCESS_MESSAGE } from "../../commons/hooks/useFetch";
+import {
+  useGet,
+  usePost,
+  NO_SUCCESS_MESSAGE,
+} from "../../commons/hooks/useFetch";
 import { updateGroupName } from "../actions/clientGroupNameActions";
 import {
   updatePathogensList,
@@ -32,7 +36,7 @@ const useFetchClientDataToStore = (
   }
 };
 
-const useClientFetchedData = () => {
+const useClientDataSynchronization = () => {
   useFetchClientDataToStore(
     "/patogeno",
     updatePathogensList,
@@ -54,4 +58,22 @@ const useClientFetchedData = () => {
   );
 };
 
-export default useClientFetchedData;
+const useIntervalCallsToClient = () => {
+  useInterval(
+    usePost(
+      CLIENT_SERVER,
+      NO_SUCCESS_MESSAGE,
+      "No se pudo pedir movimiento de vectores al cliente backend",
+      "/ubicacion/moverVectorRandom"
+    ),
+    CALL_ALWAYS,
+    5000
+  );
+};
+
+const useClientSynchronization = () => {
+  useClientDataSynchronization();
+  useIntervalCallsToClient();
+};
+
+export default useClientSynchronization;

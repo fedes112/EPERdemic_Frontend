@@ -1,6 +1,6 @@
 import {
   useGet,
-  usePost,
+  usePut,
   NO_SUCCESS_MESSAGE,
 } from "../../commons/hooks/useFetch";
 import { updateGroupName } from "../actions/clientGroupNameActions";
@@ -60,11 +60,21 @@ const useClientDataSynchronization = () => {
 
 const useIntervalCallsToClient = () => {
   useInterval(
-    usePost(
+    usePut(
       CLIENT_SERVER,
       NO_SUCCESS_MESSAGE,
       "No se pudo pedir movimiento de vectores al cliente backend",
       "/ubicacion/moverVectorRandom"
+    ),
+    CALL_ALWAYS,
+    5000
+  );
+  useInterval(
+    usePut(
+      CLIENT_SERVER,
+      NO_SUCCESS_MESSAGE,
+      "No se pudo pedir expansion de especies al cliente backend",
+      "/ubicacion/expandir"
     ),
     CALL_ALWAYS,
     5000

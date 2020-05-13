@@ -12,19 +12,17 @@ const DropDownPatogenos = ({ pathogens, register, setValue }) => {
       id="dropdown-basic-button"
       title="Patogenos"
     >
-      <Dropdown onSelect={() => alert("hola!")}>
-        {pathogens.map((pathogen, index) => (
-          <Dropdown.Item
-            key={(pathogen, index)}
-            ref={register}
-            name="patogeno"
-            eventKey={pathogen.id}
-            onSelect={(tipo) => setValue("patogeno", tipo)}
-          >
-            <option value={pathogen}>{pathogen.tipo}</option>
-          </Dropdown.Item>
-        ))}
-      </Dropdown>
+      {pathogens.map((pathogen, index) => (
+        <Dropdown.Item
+          key={(pathogen, index)}
+          ref={register}
+          name="patogeno"
+          eventKey={pathogen.id}
+          onSelect={(tipo) => setValue("patogeno", tipo)}
+        >
+          <option value={pathogen}>{pathogen.tipo}</option>
+        </Dropdown.Item>
+      ))}
     </DropdownButton>
   );
 };

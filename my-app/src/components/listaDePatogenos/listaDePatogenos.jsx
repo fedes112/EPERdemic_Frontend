@@ -8,6 +8,9 @@ import { useGet } from "../../commons/hooks/useFetch";
 import { CLIENT_SERVER } from "../../commons/enums/enums";
 
 const ListGroupDeEspecies = ({ listaEspecies }) => {
+  const [especieSeleccionada, setEspecieSeleccionada] = useState("");
+  console.log(especieSeleccionada);
+
   return (
     <ListGroup className="list-group-flush list-group-especies">
       {listaEspecies.length === 0 ? (
@@ -15,7 +18,13 @@ const ListGroupDeEspecies = ({ listaEspecies }) => {
       ) : (
         <div>
           {listaEspecies.map((especie, index) => (
-            <ListGroup.Item>{especie.nombre}</ListGroup.Item>
+            <ListGroup.Item
+              action
+              onClick={() => setEspecieSeleccionada(especie.nombre)}
+              key={index}
+            >
+              {especie.nombre}
+            </ListGroup.Item>
           ))}
         </div>
       )}
@@ -27,7 +36,6 @@ const ListaDePatogenos = () => {
   const [patogenoSeleccionado, setPatogenoSeleccionado] = useState(-1);
   const [especies, setEspecies] = useState([]);
   const { register, handleSubmit, reset, setValue } = useForm();
-  console.log("AYUDAAAAAAAAAAA");
   console.log(`/especie/${patogenoSeleccionado.patogenoSeleccionado}`);
   console.log(patogenoSeleccionado);
   console.log(especies);

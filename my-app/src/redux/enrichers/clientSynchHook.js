@@ -1,3 +1,4 @@
+import { useStore } from "react-redux";
 import {
   useGet,
   usePut,
@@ -59,6 +60,9 @@ const useClientDataSynchronization = () => {
 };
 
 const useIntervalCallsToClient = () => {
+  const store = useStore();
+  const callOnlyIfSimulationStarted = () => store.getState().simulation.started;
+
   useInterval(
     usePut(
       CLIENT_SERVER,
@@ -66,7 +70,7 @@ const useIntervalCallsToClient = () => {
       "No se pudo pedir movimiento de vectores al cliente backend",
       "/ubicacion/moverVectorRandom"
     ),
-    CALL_ALWAYS,
+    callOnlyIfSimulationStarted,
     5000
   );
   useInterval(
@@ -76,7 +80,7 @@ const useIntervalCallsToClient = () => {
       "No se pudo pedir expansion de especies al cliente backend",
       "/ubicacion/expandir"
     ),
-    CALL_ALWAYS,
+    callOnlyIfSimulationStarted,
     5000
   );
 };

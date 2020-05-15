@@ -16,7 +16,7 @@ import { usePost } from "../../commons/hooks/useFetch";
 import { CLIENT_SERVER } from "../../commons/enums/enums";
 import { isEmpty } from "lodash";
 
-const AgregarEspecie = ({ ubicaciones }) => {
+const AgregarEspecie = ({ ubicaciones, pathogens }) => {
   const [especie, setEspecie] = useState({});
   const { register, handleSubmit, reset, setValue } = useForm();
 
@@ -56,6 +56,9 @@ const AgregarEspecie = ({ ubicaciones }) => {
             register={register}
             setValue={setValue}
             ubicaciones={ubicaciones}
+            patogenoSelecc={pathogens.find(
+              (patogeno) => patogeno.id == especie.patogeno
+            )}
           />
           <BotonAgregarEspecie />
         </Form>
@@ -64,10 +67,15 @@ const AgregarEspecie = ({ ubicaciones }) => {
   );
 };
 
-const AgregarEspecieForm = ({ register, setValue, ubicaciones }) => {
+const AgregarEspecieForm = ({
+  register,
+  setValue,
+  ubicaciones,
+  patogenoSelecc,
+}) => {
   return (
     <Card className="m-2 shadow">
-      <AgregarEspecieHeader />
+      <AgregarEspecieHeader patogenoSelecc={patogenoSelecc} />
       <AgregarEspecieBody
         register={register}
         setValue={setValue}
@@ -93,11 +101,15 @@ const BotonAgregarEspecie = () => {
   );
 };
 
-const AgregarEspecieHeader = () => {
+const AgregarEspecieHeader = ({ patogenoSelecc }) => {
   return (
     <Card.Header>
       <div style={{ display: "inline-block" }}>Agregar especie para:</div>
-      <h5 className="nombre-patogeno-text">Los Millones De Ronny</h5>
+      <h5 className="nombre-patogeno-text">
+        {patogenoSelecc === undefined
+          ? "No se selecciono un patogeno"
+          : patogenoSelecc.tipo}
+      </h5>
     </Card.Header>
   );
 };
@@ -169,6 +181,7 @@ const FormUbicacionDeOrigen = ({ register, ubicaciones, setValue }) => {
 
 const mapStateToProps = (state) => ({
   ubicaciones: state.client.ubicaciones,
+  pathogens: state.client.pathogens,
 });
 
 export default connect(mapStateToProps)(AgregarEspecie);

@@ -10,7 +10,7 @@ import { CLIENT_SERVER } from "../../commons/enums/enums";
 const InformacionDeEspecie = ({ selected_species }) => {
   return (
     <Card className="m-2 shadow">
-      <InfoEspecieHeader />
+      <InfoEspecieHeader selected_species={selected_species} />
       <Image
         fluid
         style={{ alignSelf: "center", height: "275px", width: "283px" }}
@@ -21,13 +21,39 @@ const InformacionDeEspecie = ({ selected_species }) => {
   );
 };
 
-const InfoEspecieHeader = () => {
+const InfoEspecieHeader = ({ selected_species }) => {
+  const [esPandemia, setEsPandemia] = useState(1);
+
+  /*useEffect(() => {
+    if (Object.keys(selected_species).length !== 0) {
+      console.log("Getting DATA:", selected_species.nombre);
+      getPandemiaEs();
+    }
+  }, [selected_species]);
+
+  const getPandemiaEs = useGet(
+    CLIENT_SERVER,
+    "Solicitud mandada",
+    "Hubo un problema con la solicitud D:",
+    `/patogeno/esPandemia/${selected_species.id}`,
+    setEsPandemia
+  );*/
+
   return (
     <Card.Header>
       <div className="float-left">Informacion De Especie</div>
       <div className="float-right">
-        <FontAwesomeIcon style={{ color: "red" }} icon={faExclamationCircle} />
-        <div className="pl-2 text-primary float-right">Es Pandemia</div>
+        {esPandemia == 1 ? (
+          <div className="pl-2 text-primary float-right"></div>
+        ) : (
+          <div>
+            <FontAwesomeIcon
+              style={{ color: "red" }}
+              icon={faExclamationCircle}
+            />
+            <div className="pl-2 text-primary float-right">Es Pandemia</div>
+          </div>
+        )}
       </div>
     </Card.Header>
   );

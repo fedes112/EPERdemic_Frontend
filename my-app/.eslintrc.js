@@ -33,7 +33,7 @@ module.exports = {
   rules: {
     "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn", //Check effect dependencies
+    "react-hooks/exhaustive-deps": "off", //Check effect dependencies
     "prettier/prettier": "error",
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     // You can do your customizations here...

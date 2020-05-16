@@ -6,7 +6,7 @@ import Especie from "./resources/especie.png";
 import { connect } from "react-redux";
 import { useGet } from "../../commons/hooks/useFetch";
 import { CLIENT_SERVER } from "../../commons/enums/enums";
-
+/* eslint-disable react-hooks/exhaustive-deps */
 const InformacionDeEspecie = ({ selected_species }) => {
   return (
     <Card className="m-2 shadow">
@@ -24,8 +24,8 @@ const InformacionDeEspecie = ({ selected_species }) => {
 const InfoEspecieHeader = ({ selected_species }) => {
   const [esPandemia, setEsPandemia] = useState(1);
 
-  /*useEffect(() => {
-    if (Object.keys(selected_species).length !== 0) {
+  useEffect(() => {
+    if (Object.keys(selected_species).length !== 0 && false) {
       console.log("Getting DATA:", selected_species.nombre);
       getPandemiaEs();
     }
@@ -37,13 +37,13 @@ const InfoEspecieHeader = ({ selected_species }) => {
     "Hubo un problema con la solicitud D:",
     `/patogeno/esPandemia/${selected_species.id}`,
     setEsPandemia
-  );*/
+  );
 
   return (
     <Card.Header>
       <div className="float-left">Informacion De Especie</div>
       <div className="float-right">
-        {esPandemia == 1 ? (
+        {esPandemia === 1 ? (
           <div className="pl-2 text-primary float-right"></div>
         ) : (
           <div>

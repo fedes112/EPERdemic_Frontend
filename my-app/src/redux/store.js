@@ -12,6 +12,5 @@ const rootReducer = combineReducers({
   simulation: simulationReducer,
 });
 
-const stateContainer = createStore(rootReducer);
-// , applyMiddleware(logger)
+const stateContainer = createStore(rootReducer, applyMiddleware(logger));
 export default stateContainer;

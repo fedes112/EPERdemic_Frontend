@@ -6,11 +6,13 @@ import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useGet } from "../../commons/hooks/useFetch";
 import { CLIENT_SERVER } from "../../commons/enums/enums";
+import { updateSelectedSpecies } from "../../redux/actions/backendSpeciesActions";
 
-const ListGroupDeEspecies = ({ listaEspecies }) => {
-  const [especieSeleccionada, setEspecieSeleccionada] = useState("");
-  console.log(especieSeleccionada);
-
+const ListGroupDeEspecies = ({
+  listaEspecies,
+  selected_species,
+  updateEspecie,
+}) => {
   return (
     <ListGroup className="list-group-flush list-group-especies">
       {listaEspecies.length === 0 ? (
@@ -20,7 +22,7 @@ const ListGroupDeEspecies = ({ listaEspecies }) => {
           {listaEspecies.map((especie, index) => (
             <ListGroup.Item
               action
-              onClick={() => setEspecieSeleccionada(especie.nombre)}
+              onClick={() => updateEspecie(especie)}
               key={index}
             >
               {especie.nombre}
@@ -32,13 +34,10 @@ const ListGroupDeEspecies = ({ listaEspecies }) => {
   );
 };
 
-const ListaDePatogenos = () => {
+const ListaDePatogenos = ({ selected_species, updateEspecie }) => {
   const [patogenoSeleccionado, setPatogenoSeleccionado] = useState(-1);
   const [especies, setEspecies] = useState([]);
   const { register, handleSubmit, reset, setValue } = useForm();
-  console.log(`/especie/${patogenoSeleccionado.patogenoSeleccionado}`);
-  console.log(patogenoSeleccionado);
-  console.log(especies);
 
   const handleSelectEspecie = (data) => {
     setPatogenoSeleccionado({
@@ -70,7 +69,11 @@ const ListaDePatogenos = () => {
         <Card.Body>
           <DropDownPatogenos register={register} setValue={setValue} />
           <Card.Title>Especies</Card.Title>
-          <ListGroupDeEspecies listaEspecies={especies || []} />
+          <ListGroupDeEspecies
+            listaEspecies={especies || []}
+            selected_species={selected_species}
+            updateEspecie={updateEspecie}
+          />
           <Button
             style={{
               paddingRight: "50px",
@@ -89,7 +92,15 @@ const ListaDePatogenos = () => {
 };
 
 const mapStateToProps = (state) => ({
-  pathogens: state.client.pathogens,
+  selected_species: state.backend.selected_species,
 });
 
-export default connect(mapStateToProps)(ListaDePatogenos);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateEspecie: (data) => {
+      dispatch(updateSelectedSpecies(data));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListaDePatogenos);

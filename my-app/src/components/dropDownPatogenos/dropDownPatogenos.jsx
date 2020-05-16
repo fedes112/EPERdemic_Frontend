@@ -4,7 +4,6 @@ import "./dropDownPatogenos.css";
 import { connect } from "react-redux";
 
 const DropDownPatogenos = ({ pathogens, register, setValue }) => {
-  console.log(pathogens);
   return (
     <DropdownButton
       className="dropdown-pathogen-button"

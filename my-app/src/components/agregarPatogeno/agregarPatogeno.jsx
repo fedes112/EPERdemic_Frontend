@@ -7,6 +7,7 @@ import { CLIENT_SERVER } from "../../commons/enums/enums";
 import { useForm } from "react-hook-form";
 import { isEmpty } from "lodash";
 
+/* eslint-disable react-hooks/exhaustive-deps */
 const AgregarPatogeno = () => {
   const [pathogen, setPathogen] = useState({});
   const { register, handleSubmit, reset } = useForm();

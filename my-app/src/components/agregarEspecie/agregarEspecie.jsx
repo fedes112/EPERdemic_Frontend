@@ -16,6 +16,7 @@ import { usePost } from "../../commons/hooks/useFetch";
 import { CLIENT_SERVER } from "../../commons/enums/enums";
 import { isEmpty } from "lodash";
 
+/* eslint-disable react-hooks/exhaustive-deps */
 const AgregarEspecie = ({ ubicaciones, pathogens }) => {
   const [especie, setEspecie] = useState({});
   const { register, handleSubmit, reset, setValue } = useForm();
@@ -57,7 +58,7 @@ const AgregarEspecie = ({ ubicaciones, pathogens }) => {
             setValue={setValue}
             ubicaciones={ubicaciones}
             patogenoSelecc={pathogens.find(
-              (patogeno) => patogeno.id == especie.patogeno
+              (patogeno) => patogeno.id === especie.patogeno
             )}
           />
           <BotonAgregarEspecie />

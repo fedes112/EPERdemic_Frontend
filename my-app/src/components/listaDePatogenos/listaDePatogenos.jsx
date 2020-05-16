@@ -8,6 +8,7 @@ import { useGet } from "../../commons/hooks/useFetch";
 import { CLIENT_SERVER } from "../../commons/enums/enums";
 import { updateSelectedSpecies } from "../../redux/actions/backendSpeciesActions";
 
+/* eslint-disable react-hooks/exhaustive-deps */
 const ListGroupDeEspecies = ({
   listaEspecies,
   selected_species,

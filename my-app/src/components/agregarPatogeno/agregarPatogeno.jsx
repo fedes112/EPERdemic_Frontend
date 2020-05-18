@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Image, Card, Form, Col, Row } from "react-bootstrap";
+import { Button, Image, Form, Col, Row } from "react-bootstrap";
 import Virus from "./resources/virus.png";
 import AgregarPatogenoForm from "./agregarPatogenoForm/agregarPatogenoForm";
 import { usePost } from "../../commons/hooks/useFetch";
@@ -42,22 +42,17 @@ const AgregarPatogeno = () => {
   }, [pathogen]);
 
   return (
-    <Card className="m-2 shadow-2">
-      <Card.Header>Agregar Patogeno</Card.Header>
-      <Card.Body>
-        <Form className="px-2" onSubmit={handleSubmit(handleSendPathogen)}>
-          <Form.Group style={{ marginBottom: "0px" }} as={Row}>
-            <Col md="7">
-              <AgregarPatogenoForm register={register} />
-            </Col>
-            <Col md="5">
-              <ImagenVirus />
-            </Col>
-            <BotonAgregarPatogeno />
-          </Form.Group>
-        </Form>
-      </Card.Body>
-    </Card>
+    <Form className="px-2" onSubmit={handleSubmit(handleSendPathogen)}>
+      <Form.Group style={{ marginBottom: "0px" }} as={Row}>
+        <Col md="7">
+          <AgregarPatogenoForm register={register} />
+        </Col>
+        <Col md="5">
+          <ImagenVirus />
+        </Col>
+        <BotonAgregarPatogeno />
+      </Form.Group>
+    </Form>
   );
 };
 

@@ -19,10 +19,46 @@ const Ubicaciones = () => {
             <tbody>
               <tr>
                 <td>Argentina</td>
-                <td>Brasil</td>
+                <td>1111111</td>
               </tr>
               <tr>
-                <td>11111111</td>
+                <td>Brasil</td>
+                <td>22222222</td>
+              </tr>
+              <tr>
+                <td>Peru</td>
+                <td>22222222</td>
+              </tr>
+              <tr>
+                <td>Uruguay</td>
+                <td>22222222</td>
+              </tr>
+              <tr>
+                <td>Varela</td>
+                <td>22222222</td>
+              </tr>
+              <tr>
+                <td>Bolivia</td>
+                <td>22222222</td>
+              </tr>
+              <tr>
+                <td>Republica Checa</td>
+                <td>22222222</td>
+              </tr>
+              <tr>
+                <td>USA</td>
+                <td>22222222</td>
+              </tr>
+              <tr>
+                <td>Fran</td>
+                <td>22222222</td>
+              </tr>
+              <tr>
+                <td>Canada</td>
+                <td>22222222</td>
+              </tr>
+              <tr>
+                <td>Trinidad y Tobago</td>
                 <td>22222222</td>
               </tr>
             </tbody>

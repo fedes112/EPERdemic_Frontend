@@ -1,10 +1,11 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import AgregarPatogeno from "../../../components/agregarPatogeno/agregarPatogeno";
-import AgregarEspecie from "../../../components/agregarEspecie/agregarEspecie";
+import AgregarPatogenoModal from "../../../components/agregarPatogeno/agregarPatogenoModal";
+import AgregarEspecieModal from "../../../components/agregarEspecie/agregarEspecieModal";
 import ListaDePatogenos from "../../../components/listaDePatogenos/listaDePatogenos";
 import InformacionDeEspecie from "../../../components/informacionDeEspecie/informacionDeEspecie";
 import BotonDeEmpezarSimulacion from "../../../components/botonDeEmpezarSimulacion/botonDeEmpezarSimulacion";
+import Ubicaciones from "../ubicacion/ubicaciones";
 import "./home.css";
 
 const Home = () => {
@@ -47,10 +48,11 @@ const SecondColumn = () => {
   return (
     <>
       <Row>
-        <AgregarPatogeno />
+        <AgregarPatogenoModal />
+        <AgregarEspecieModal />
       </Row>
       <Row>
-        <AgregarEspecie />
+        <Ubicaciones />
       </Row>
     </>
   );

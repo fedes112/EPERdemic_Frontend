@@ -1,30 +1,58 @@
-import React from "react";
-import { Button, Image, Card, Form, Col, Row } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Button, Image, Form, Col, Row } from "react-bootstrap";
 import Virus from "./resources/virus.png";
 import AgregarPatogenoForm from "./agregarPatogenoForm/agregarPatogenoForm";
+import { usePost } from "../../commons/hooks/useFetch";
+import { CLIENT_SERVER } from "../../commons/enums/enums";
+import { useForm } from "react-hook-form";
+import { isEmpty } from "lodash";
 
+/* eslint-disable react-hooks/exhaustive-deps */
 const AgregarPatogeno = () => {
+  const [pathogen, setPathogen] = useState({});
+  const { register, handleSubmit, reset } = useForm();
+
+  const handleSendPathogen = (data) => {
+    setPathogen({
+      ...pathogen,
+      tipo: data.tipo,
+      capacidadContagioPersona: data.capacidadContagioPersona,
+      capacidadContagioInsectos: data.capacidadContagioInsectos,
+      capacidadContagioAnimal: data.capacidadContagioAnimal,
+      defensa: data.defensa,
+      letalidad: data.letalidad,
+    });
+    reset();
+  };
+
+  const sendPathogen = usePost(
+    CLIENT_SERVER,
+    "Se creo el patogeno con exito",
+    "Hubo un problema creando el patogeno D:",
+    "/patogeno",
+    () => {},
+    pathogen
+  );
+
+  useEffect(() => {
+    if (!isEmpty(pathogen)) {
+      console.log("SENDING DATA:", pathogen);
+      sendPathogen();
+    }
+  }, [pathogen]);
+
   return (
-    <Card className="m-2 shadow-2">
-      <Card.Header>Agregar Patogeno</Card.Header>
-      <Card.Body>
-        <Form className="px-2">
-          <Form.Group
-            style={{ marginBottom: "0px" }}
-            as={Row}
-            controlId="formPlaintextPassword"
-          >
-            <Col md="7">
-              <AgregarPatogenoForm />
-            </Col>
-            <Col md="5">
-              <ImagenVirus />
-            </Col>
-            <BotonAgregarPatogeno />
-          </Form.Group>
-        </Form>
-      </Card.Body>
-    </Card>
+    <Form className="px-2" onSubmit={handleSubmit(handleSendPathogen)}>
+      <Form.Group style={{ marginBottom: "0px" }} as={Row}>
+        <Col md="7">
+          <AgregarPatogenoForm register={register} />
+        </Col>
+        <Col md="5">
+          <ImagenVirus />
+        </Col>
+        <BotonAgregarPatogeno />
+      </Form.Group>
+    </Form>
   );
 };
 
@@ -43,6 +71,7 @@ const BotonAgregarPatogeno = () => {
         width: "-webkit-fill-available",
       }}
       variant="primary"
+      type="submit"
     >
       ¡ Crear Patogeno !
     </Button>

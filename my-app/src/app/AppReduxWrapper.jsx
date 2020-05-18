@@ -3,11 +3,11 @@ import { Provider } from "react-redux";
 import stateContainer from "../redux/store";
 import App from "./App";
 import useBackendSynchronization from "../redux/enrichers/backendSynchHook";
-import useClientFetchedData from "../redux/enrichers/clientFetchedDataHook";
+import useClientSynchronization from "../redux/enrichers/clientSynchHook";
 
 const AppStoreEnricherWrapper = () => {
   useBackendSynchronization();
-  useClientFetchedData();
+  useClientSynchronization();
   return <App />;
 };
 

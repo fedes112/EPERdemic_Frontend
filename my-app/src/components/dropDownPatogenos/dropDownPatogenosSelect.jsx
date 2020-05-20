@@ -2,32 +2,50 @@ import React from "react";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import "./dropDownPatogenos.css";
 import { connect } from "react-redux";
+import { updateSelectedPathogen } from "../../redux/actions/backendPathogensActions";
 
-const DropDownPatogenos = ({ pathogens, register, setValue }) => {
+const DropDownPatogenos = ({
+  pathogens,
+  register,
+  setValue,
+  selected_pathogen,
+  updateSelectedPathogen,
+}) => {
   return (
     <DropdownButton
       className="dropdown-pathogen-button"
       style={{ width: "-webkit-fill-available", marginBottom: "0.75rem" }}
       id="dropdown-basic-button"
-      title="Patogenos"
+      title={selected_pathogen.pathogen_name || "Patogenos"}
     >
       {pathogens.map((pathogen, index) => (
         <Dropdown.Item
           key={(pathogen, index)}
-          ref={register}
-          name="patogenoSeleccionado"
-          eventKey={pathogen.id}
-          onSelect={(tipo) => setValue("patogenoSeleccionado", tipo)}
+          onClick={() =>
+            updateSelectedPathogen({
+              pathogen: pathogen.id,
+              pathogen_name: pathogen.tipo,
+            })
+          }
         >
-          <option value={pathogen}>{pathogen.tipo}</option>
+          {pathogen.tipo}
         </Dropdown.Item>
       ))}
     </DropdownButton>
   );
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateSelectedPathogen: (data) => {
+      dispatch(updateSelectedPathogen(data));
+    },
+  };
+};
+
 const mapStateToProps = (state) => ({
   pathogens: state.client.pathogens,
+  selected_pathogen: state.backend.selected_pathogen,
 });
 
-export default connect(mapStateToProps)(DropDownPatogenos);
+export default connect(mapStateToProps, mapDispatchToProps)(DropDownPatogenos);

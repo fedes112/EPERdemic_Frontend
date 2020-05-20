@@ -29,7 +29,7 @@ const ModalContainer = ({ buttonText, buttonIcon, headerText, body }) => {
     <>
       <Button
         className="m-2 shadow"
-        style={{ width: "48%", height: "90px" }}
+        style={{ height: "90px", width: "-webkit-fill-available" }}
         variant="info"
         onClick={() => setModalShow(true)}
       >

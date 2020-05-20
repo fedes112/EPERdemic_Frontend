@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
+import "./modalContainer.css";
 
 function VerticallyCenteredModal(props) {
   return (
@@ -28,8 +29,7 @@ const ModalContainer = ({ buttonText, buttonIcon, headerText, body }) => {
   return (
     <>
       <Button
-        className="m-2 shadow"
-        style={{ height: "90px", width: "-webkit-fill-available" }}
+        className="m-2 shadow modal-container-button"
         variant="info"
         onClick={() => setModalShow(true)}
       >

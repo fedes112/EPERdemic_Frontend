@@ -48,23 +48,18 @@ const AgregarEspecie = ({ ubicaciones, pathogens }) => {
   }, [especie]);
 
   return (
-    <Card className="m-2 shadow">
-      <Card.Header>Agregar Especie</Card.Header>
-      <Card.Body>
-        <Form className="px-2" onSubmit={handleSubmit(handleSendEspecie)}>
-          <DropDownPatogenos register={register} setValue={setValue} />
-          <AgregarEspecieForm
-            register={register}
-            setValue={setValue}
-            ubicaciones={ubicaciones}
-            patogenoSelecc={pathogens.find(
-              (patogeno) => patogeno.id === especie.patogeno
-            )}
-          />
-          <BotonAgregarEspecie />
-        </Form>
-      </Card.Body>
-    </Card>
+    <Form className="px-2" onSubmit={handleSubmit(handleSendEspecie)}>
+      <DropDownPatogenos register={register} setValue={setValue} />
+      <AgregarEspecieForm
+        register={register}
+        setValue={setValue}
+        ubicaciones={ubicaciones}
+        patogenoSelecc={pathogens.find(
+          (patogeno) => patogeno.id === especie.patogeno
+        )}
+      />
+      <BotonAgregarEspecie />
+    </Form>
   );
 };
 

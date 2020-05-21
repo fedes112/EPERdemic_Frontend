@@ -1,10 +1,11 @@
 import React from "react";
-import { Navbar, NavDropdown } from "react-bootstrap";
+import { connect } from "react-redux";
+import { Navbar } from "react-bootstrap";
 import { faBiohazard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./nav_drop_down.css";
 
-function EPERdemicNavBar() {
+function EPERdemicNavBar({ groupName }) {
   return (
     <Navbar bg="primary" variant="dark">
       <Navbar.Brand href="/">
@@ -14,15 +15,13 @@ function EPERdemicNavBar() {
           size="2x"
         />
       </Navbar.Brand>
-      <Navbar.Brand href="/">NombreDelEquipo</Navbar.Brand>
-      <Navbar.Brand>
-        <NavDropdown title="Rankings" id="nav-dropdown">
-          <NavDropdown.Item href="ubicaciones">Ubicaciones</NavDropdown.Item>
-        </NavDropdown>
-      </Navbar.Brand>
-      <Navbar.Brand href="vectores">Vectores</Navbar.Brand>
+      <Navbar.Brand>{`${groupName}`}</Navbar.Brand>
     </Navbar>
   );
 }
 
-export default EPERdemicNavBar;
+const mapStateToProps = (state) => ({
+  groupName: state.client.groupName,
+});
+
+export default connect(mapStateToProps)(EPERdemicNavBar);

@@ -47,9 +47,13 @@ const FirstColumn = () => {
 const SecondColumn = () => {
   return (
     <>
-      <Row>
-        <AgregarPatogenoModal />
-        <AgregarEspecieModal />
+      <Row className="mx-3">
+        <Col>
+          <AgregarPatogenoModal />
+        </Col>
+        <Col>
+          <AgregarEspecieModal />
+        </Col>
       </Row>
       <Row>
         <Ubicaciones />

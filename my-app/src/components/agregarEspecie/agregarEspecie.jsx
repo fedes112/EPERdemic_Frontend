@@ -14,52 +14,49 @@ import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 import { usePost } from "../../commons/hooks/useFetch";
 import { CLIENT_SERVER } from "../../commons/enums/enums";
-import { isEmpty } from "lodash";
 import { updateToCreatePathogen } from "../../redux/actions/backendPathogensActions";
 
 /* eslint-disable react-hooks/exhaustive-deps */
 const AgregarEspecie = ({
   ubicaciones,
-  pathogens,
   pathogen_to_create,
   selectToCreatePathogen,
 }) => {
-  const [especie, setEspecie] = useState({});
-  const [patogenoSeleccionado, setPatogenoSeleccionado] = useState({});
-  const { register, handleSubmit, reset, setValue } = useForm();
-
-  console.log("PATOGENO PARA CREAR");
-  console.log(pathogen_to_create);
+  const { handleSubmit } = useForm();
+  const [crearEspecie, setCrearEspecie] = useState(false);
 
   const handleSendEspecie = (data) => {
-    setEspecie({
-      ...especie,
-      patogeno: data.patogeno,
-      nombre: data.nombre,
-      paisDeOrigen: data.paisDeOrigen,
-    });
-    reset();
+    setCrearEspecie(true);
   };
 
   const sendEspecie = usePost(
     CLIENT_SERVER,
     "Se creo la especie con exito",
     "Hubo un problema creando la especie D:",
-    `/patogeno/${especie.patogeno}`,
+    `/patogeno/${pathogen_to_create.pathogen}`,
     () => {},
-    especie
+    {
+      nombre: pathogen_to_create.nombre,
+      paisDeOrigen: pathogen_to_create.paisDeOrigen,
+    }
   );
 
   useEffect(() => {
-    if (!isEmpty(especie)) {
-      console.log("SENDING DATA:", especie);
+    if (
+      pathogen_to_create.nombre &&
+      pathogen_to_create.paisDeOrigen &&
+      crearEspecie
+    ) {
+      console.log("SENDING DATA:", pathogen_to_create);
       sendEspecie();
+      setCrearEspecie(false);
+      selectToCreatePathogen({});
     }
-  }, [especie]);
+  }, [crearEspecie]);
 
   return (
     <Form className="px-2" onSubmit={handleSubmit(handleSendEspecie)}>
-      <DropDownPatogenos register={register} setValue={setValue} />
+      <DropDownPatogenos />
       <AgregarEspecieForm
         ubicaciones={ubicaciones}
         patogenoSelecc={pathogen_to_create.pathogen_name}
@@ -72,8 +69,6 @@ const AgregarEspecie = ({
 };
 
 const AgregarEspecieForm = ({
-  register,
-  setValue,
   ubicaciones,
   patogenoSelecc,
   selectToCreatePathogen,
@@ -83,8 +78,6 @@ const AgregarEspecieForm = ({
     <Card className="m-2 shadow">
       <AgregarEspecieHeader patogenoSelecc={patogenoSelecc || ""} />
       <AgregarEspecieBody
-        register={register}
-        setValue={setValue}
         ubicaciones={ubicaciones}
         selectToCreatePathogen={selectToCreatePathogen}
         pathogen_to_create={pathogen_to_create}
@@ -123,9 +116,7 @@ const AgregarEspecieHeader = ({ patogenoSelecc }) => {
 };
 
 const AgregarEspecieBody = ({
-  register,
   ubicaciones,
-  setValue,
   selectToCreatePathogen,
   pathogen_to_create,
 }) => {
@@ -133,15 +124,12 @@ const AgregarEspecieBody = ({
     <Card.Body>
       <Row>
         <FormNombreDeLaEspecie
-          register={register}
           selectToCreatePathogen={selectToCreatePathogen}
           pathogen_to_create={pathogen_to_create}
         />
       </Row>
       <Row>
         <FormUbicacionDeOrigen
-          register={register}
-          setValue={setValue}
           ubicaciones={ubicaciones}
           selectToCreatePathogen={selectToCreatePathogen}
           pathogen_to_create={pathogen_to_create}
@@ -152,7 +140,6 @@ const AgregarEspecieBody = ({
 };
 
 const FormNombreDeLaEspecie = ({
-  register,
   selectToCreatePathogen,
   pathogen_to_create,
 }) => {
@@ -216,7 +203,6 @@ const FormUbicacionDeOrigen = ({
 
 const mapStateToProps = (state) => ({
   ubicaciones: state.client.ubicaciones,
-  pathogens: state.client.pathogens,
   pathogen_to_create: state.backend.pathogen_to_create,
 });
 

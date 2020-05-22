@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useGet } from "../../commons/hooks/useFetch";
 import { CLIENT_SERVER } from "../../commons/enums/enums";
 import { updateSelectedSpecies } from "../../redux/actions/backendSpeciesActions";
+import { updateSelectedPathogen } from "../../redux/actions/backendPathogensActions";
 
 /* eslint-disable react-hooks/exhaustive-deps */
 const ListGroupDeEspecies = ({
@@ -39,14 +40,18 @@ const ListaDePatogenos = ({
   selected_species,
   updateEspecie,
   selected_pathogen,
+  updateSelectedPathogen,
 }) => {
   const [especies, setEspecies] = useState([]);
   const { handleSubmit } = useForm();
 
   useEffect(() => {
-    if (selected_pathogen.pathogen) {
+    if (selected_pathogen.pathogen !== undefined) {
       console.log("Getting DATA:", selected_pathogen.pathogen);
       getEspecies();
+      updateSelectedPathogen({
+        pathogen: undefined,
+      });
     }
   }, [selected_pathogen.pathogen]);
 
@@ -83,6 +88,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    updateSelectedPathogen: (data) => {
+      dispatch(updateSelectedPathogen(data));
+    },
     updateEspecie: (data) => {
       dispatch(updateSelectedSpecies(data));
     },

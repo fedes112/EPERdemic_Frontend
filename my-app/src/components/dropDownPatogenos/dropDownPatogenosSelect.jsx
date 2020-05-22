@@ -11,6 +11,13 @@ const DropDownPatogenos = ({
   selected_pathogen,
   updateSelectedPathogen,
 }) => {
+  const handleUpdate = (pathogen) => {
+    updateSelectedPathogen({
+      pathogen: pathogen.id,
+      pathogen_name: pathogen.tipo,
+    });
+  };
+
   return (
     <DropdownButton
       className="dropdown-pathogen-button"
@@ -21,12 +28,7 @@ const DropDownPatogenos = ({
       {pathogens.map((pathogen, index) => (
         <Dropdown.Item
           key={(pathogen, index)}
-          onClick={() =>
-            updateSelectedPathogen({
-              pathogen: pathogen.id,
-              pathogen_name: pathogen.tipo,
-            })
-          }
+          onClick={() => handleUpdate(pathogen)}
         >
           {pathogen.tipo}
         </Dropdown.Item>

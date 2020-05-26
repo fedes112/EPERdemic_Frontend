@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useGet } from "../../commons/hooks/useFetch";
 import { CLIENT_SERVER } from "../../commons/enums/enums";
 import { updateSelectedSpecies } from "../../redux/actions/backendSpeciesActions";
+import { updateSelectedPathogen } from "../../redux/actions/backendPathogensActions";
 
 /* eslint-disable react-hooks/exhaustive-deps */
 const ListGroupDeEspecies = ({
@@ -35,57 +36,45 @@ const ListGroupDeEspecies = ({
   );
 };
 
-const ListaDePatogenos = ({ selected_species, updateEspecie }) => {
-  const [patogenoSeleccionado, setPatogenoSeleccionado] = useState(-1);
+const ListaDePatogenos = ({
+  selected_species,
+  updateEspecie,
+  selected_pathogen,
+  updateSelectedPathogen,
+}) => {
   const [especies, setEspecies] = useState([]);
-  const { register, handleSubmit, reset, setValue } = useForm();
-
-  const handleSelectEspecie = (data) => {
-    setPatogenoSeleccionado({
-      ...patogenoSeleccionado,
-      patogenoSeleccionado: data.patogenoSeleccionado,
-    });
-    reset();
-  };
+  const { handleSubmit } = useForm();
 
   useEffect(() => {
-    if (patogenoSeleccionado !== undefined && patogenoSeleccionado !== -1) {
-      console.log("Getting DATA:", patogenoSeleccionado);
+    if (selected_pathogen.pathogen !== undefined) {
+      console.log("Getting DATA:", selected_pathogen.pathogen);
       getEspecies();
+      updateSelectedPathogen({
+        pathogen: undefined,
+      });
     }
-  }, [patogenoSeleccionado]);
+  }, [selected_pathogen.pathogen]);
 
   const getEspecies = useGet(
     CLIENT_SERVER,
     "Solicitud mandada",
     "Hubo un problema con la solicitud D:",
-    `/especie/${patogenoSeleccionado.patogenoSeleccionado}`,
+    `/especie/${selected_pathogen.pathogen}`,
     setEspecies
   );
 
   return (
     <Card className="m-2 shadow">
-      <Card.Header>Lista de Patogenos</Card.Header>
-      <Form className="px-2" onSubmit={handleSubmit(handleSelectEspecie)}>
+      <Card.Header>Lista de Especies</Card.Header>
+      <Form className="px-2" onSubmit={handleSubmit()}>
         <Card.Body>
-          <DropDownPatogenos register={register} setValue={setValue} />
+          <DropDownPatogenos />
           <Card.Title>Especies</Card.Title>
           <ListGroupDeEspecies
             listaEspecies={especies || []}
             selected_species={selected_species}
             updateEspecie={updateEspecie}
           />
-          <Button
-            style={{
-              paddingRight: "50px",
-              marginTop: "15px",
-              width: "-webkit-fill-available",
-            }}
-            variant="primary"
-            type="submit"
-          >
-            ¡ Buscar Especie !
-          </Button>
         </Card.Body>
       </Form>
     </Card>
@@ -94,10 +83,14 @@ const ListaDePatogenos = ({ selected_species, updateEspecie }) => {
 
 const mapStateToProps = (state) => ({
   selected_species: state.backend.selected_species,
+  selected_pathogen: state.backend.selected_pathogen,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    updateSelectedPathogen: (data) => {
+      dispatch(updateSelectedPathogen(data));
+    },
     updateEspecie: (data) => {
       dispatch(updateSelectedSpecies(data));
     },

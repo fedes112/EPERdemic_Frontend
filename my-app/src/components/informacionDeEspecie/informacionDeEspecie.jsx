@@ -22,7 +22,7 @@ const InformacionDeEspecie = ({ selected_species }) => {
 };
 
 const InfoEspecieHeader = ({ selected_species }) => {
-  const [esPandemia, setEsPandemia] = useState(1);
+  const [esPandemia, setEsPandemia] = useState(0);
 
   useEffect(() => {
     if (Object.keys(selected_species).length !== 0 && false) {
@@ -43,7 +43,7 @@ const InfoEspecieHeader = ({ selected_species }) => {
     <Card.Header>
       <div className="float-left">Informacion De Especie</div>
       <div className="float-right">
-        {esPandemia === 1 ? (
+        {esPandemia === 0 ? (
           <div className="pl-2 text-primary float-right"></div>
         ) : (
           <div>

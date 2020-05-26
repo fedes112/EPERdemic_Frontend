@@ -3,6 +3,7 @@ import { DropdownButton, Dropdown } from "react-bootstrap";
 import "./dropDownPatogenos.css";
 import { connect } from "react-redux";
 import { updateSelectedPathogen } from "../../redux/actions/backendPathogensActions";
+import { useState } from "react";
 
 const DropDownPatogenos = ({
   pathogens,
@@ -11,11 +12,13 @@ const DropDownPatogenos = ({
   selected_pathogen,
   updateSelectedPathogen,
 }) => {
+  const [especiePatogenos, setEspeciePatogenos] = useState();
   const handleUpdate = (pathogen) => {
     updateSelectedPathogen({
       pathogen: pathogen.id,
       pathogen_name: pathogen.tipo,
     });
+    setEspeciePatogenos(pathogen.tipo);
   };
 
   return (
@@ -23,7 +26,7 @@ const DropDownPatogenos = ({
       className="dropdown-pathogen-button"
       style={{ width: "-webkit-fill-available", marginBottom: "0.75rem" }}
       id="dropdown-basic-button"
-      title={selected_pathogen.pathogen_name || "Patogenos"}
+      title={especiePatogenos || "Patogenos"}
     >
       {pathogens.map((pathogen, index) => (
         <Dropdown.Item

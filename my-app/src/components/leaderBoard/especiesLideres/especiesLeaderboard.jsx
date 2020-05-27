@@ -98,7 +98,10 @@ const EspeciesLeaderboard = () => {
           src={Persona}
         />
       </Col>
-      <Col md="10" style={{ paddingLeft: "20px" }}>
+      <Col
+        md="10"
+        style={{ paddingLeft: "20px", display: "flex", alignItems: "center" }}
+      >
         <Table size="sm" className="mb-0" striped bordered>
           <thead>
             <tr style={{ height: "45px" }}>

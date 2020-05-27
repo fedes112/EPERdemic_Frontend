@@ -103,7 +103,11 @@ const RowVacia = () => {
 const UbicacionesLeaderboard = () => {
   return (
     <Row className="pt-0">
-      <Col md="10" className="pl-0">
+      <Col
+        md="10"
+        className="pl-0"
+        style={{ display: "flex", alignItems: "center" }}
+      >
         <Table size="sm" className="mb-0" striped bordered>
           <thead>
             <tr style={{ height: "45px" }}>

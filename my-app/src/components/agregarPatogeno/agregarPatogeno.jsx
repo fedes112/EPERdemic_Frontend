@@ -47,7 +47,7 @@ const AgregarPatogeno = () => {
         <Col md="7">
           <AgregarPatogenoForm register={register} />
         </Col>
-        <Col md="5">
+        <Col md="5" className="pr-0">
           <ImagenVirus />
         </Col>
         <BotonAgregarPatogeno />

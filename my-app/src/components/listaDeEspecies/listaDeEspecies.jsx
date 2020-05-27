@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Card, ListGroup, Form, Button } from "react-bootstrap";
+import { Card, ListGroup, Form } from "react-bootstrap";
 import DropDownPatogenos from "../dropDownPatogenos/dropDownPatogenosSelect";
-import "./listaDePatogenos.css";
+import "./listaDeEspecies.css";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useGet } from "../../commons/hooks/useFetch";
@@ -36,7 +36,7 @@ const ListGroupDeEspecies = ({
   );
 };
 
-const ListaDePatogenos = ({
+const ListaDeEspecies = ({
   selected_species,
   updateEspecie,
   selected_pathogen,
@@ -67,9 +67,9 @@ const ListaDePatogenos = ({
     <Card className="m-2 shadow">
       <Card.Header>Lista de Especies</Card.Header>
       <Form className="px-2" onSubmit={handleSubmit()}>
-        <Card.Body>
+        <Card.Body style={{ height: "305px" }}>
           <DropDownPatogenos />
-          <Card.Title>Especies</Card.Title>
+
           <ListGroupDeEspecies
             listaEspecies={especies || []}
             selected_species={selected_species}
@@ -97,4 +97,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListaDePatogenos);
+export default connect(mapStateToProps, mapDispatchToProps)(ListaDeEspecies);

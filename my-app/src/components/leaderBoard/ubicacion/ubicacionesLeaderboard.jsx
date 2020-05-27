@@ -103,10 +103,10 @@ const RowVacia = () => {
 const UbicacionesLeaderboard = () => {
   return (
     <Row className="pt-0">
-      <Col md="10" style={{ paddingLeft: "10px" }} className="pr-0">
-        <Table size="sm" striped bordered hover>
+      <Col md="10" className="pl-0">
+        <Table size="sm" className="mb-0" striped bordered>
           <thead>
-            <tr>
+            <tr style={{ height: "45px" }}>
               <th>Equipo</th>
               <th>Ubicacion</th>
               <th>Cantidad de vectores</th>
@@ -125,13 +125,11 @@ const UbicacionesLeaderboard = () => {
           </tbody>
         </Table>
       </Col>
-      <Col md="2" className="pl-0">
+      <Col md="2" className="pr-0" style={{ paddingLeft: "10px" }}>
         <Image
           fluid
           style={{
             paddingRight: "0px",
-            height: "367px",
-            width: "275px",
           }}
           src={Mundo}
         />

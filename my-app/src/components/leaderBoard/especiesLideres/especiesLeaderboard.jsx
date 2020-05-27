@@ -94,16 +94,14 @@ const EspeciesLeaderboard = () => {
           fluid
           style={{
             paddingRight: "0px",
-            height: "367px",
-            width: "275px",
           }}
           src={Persona}
         />
       </Col>
-      <Col md="10" className="pl-0">
-        <Table size="sm" striped bordered hover>
+      <Col md="10" style={{ paddingLeft: "20px" }}>
+        <Table size="sm" className="mb-0" striped bordered>
           <thead>
-            <tr>
+            <tr style={{ height: "45px" }}>
               <th>Especie</th>
               <th>Patogeno</th>
               <th>Vectores infectados</th>

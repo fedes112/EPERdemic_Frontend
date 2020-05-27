@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import "./dropDownPatogenos.css";
 import { connect } from "react-redux";
@@ -9,6 +9,16 @@ const DropDownPatogenos = ({
   selectToCreatePathogen,
   pathogen_to_create,
 }) => {
+  const [patogenoACrear, setPatogenoACrear] = useState();
+
+  const handleCreate = (pathogen) => {
+    selectToCreatePathogen({
+      pathogen: pathogen.id,
+      pathogen_name: pathogen.tipo,
+    });
+    setPatogenoACrear(pathogen.tipo);
+  };
+
   return (
     <DropdownButton
       className="dropdown-pathogen-button"
@@ -19,13 +29,7 @@ const DropDownPatogenos = ({
       {pathogens.map((pathogen, index) => (
         <Dropdown.Item
           key={(pathogen, index)}
-          onClick={() =>
-            selectToCreatePathogen({
-              pathogen: pathogen.id,
-              pathogen_name: pathogen.tipo,
-              ...pathogen_to_create,
-            })
-          }
+          onClick={() => handleCreate(pathogen)}
         >
           {pathogen.tipo}
         </Dropdown.Item>

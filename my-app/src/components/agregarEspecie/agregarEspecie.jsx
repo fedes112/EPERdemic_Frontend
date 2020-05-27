@@ -171,6 +171,16 @@ const FormUbicacionDeOrigen = ({
   selectToCreatePathogen,
   pathogen_to_create,
 }) => {
+  const [ubicacionSeleccionada, setUbicacionSeleccionada] = useState();
+
+  const handleCreate = (ubicacion) => {
+    selectToCreatePathogen({
+      paisDeOrigen: ubicacion.nombreUbicacion,
+      ...pathogen_to_create,
+    });
+    setUbicacionSeleccionada(ubicacion.nombreUbicacion);
+  };
+
   return (
     <>
       <Col style={{ alignSelf: "flex-end" }} md="2">
@@ -180,17 +190,12 @@ const FormUbicacionDeOrigen = ({
         <DropdownButton
           className="dropdown-pathogen-button"
           id="dropdown-basic-button"
-          title={pathogen_to_create.paisDeOrigen || "Ubicaciones"}
+          title={ubicacionSeleccionada || "Ubicaciones"}
         >
           {ubicaciones.map((ubicacion, index) => (
             <Dropdown.Item
               key={(ubicacion, index)}
-              onClick={() =>
-                selectToCreatePathogen({
-                  paisDeOrigen: ubicacion.nombreUbicacion,
-                  ...pathogen_to_create,
-                })
-              }
+              onClick={() => handleCreate(ubicacion)}
             >
               {ubicacion.nombreUbicacion}
             </Dropdown.Item>

@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Card, Image } from "react-bootstrap";
+import { Card, Image, Col, Row } from "react-bootstrap";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Especie from "./resources/especie.png";
+import { sample } from "lodash";
+import Especie from "./resources/especieNoSeleccionada.png";
+import Especie1 from "./resources/especie1.png";
+import Especie2 from "./resources/especie2.png";
+import Especie3 from "./resources/especie3.png";
+import Especie4 from "./resources/especie4.png";
+import Especie5 from "./resources/especie5.png";
 import { connect } from "react-redux";
 import { useGet } from "../../commons/hooks/useFetch";
 import { CLIENT_SERVER } from "../../commons/enums/enums";
@@ -11,11 +17,7 @@ const InformacionDeEspecie = ({ selected_species }) => {
   return (
     <Card className="m-2 shadow">
       <InfoEspecieHeader selected_species={selected_species} />
-      <Image
-        fluid
-        style={{ alignSelf: "center", height: "275px", width: "283px" }}
-        src={Especie}
-      />
+
       <InfoEspecieBody selected_species={selected_species} />
     </Card>
   );
@@ -59,6 +61,32 @@ const InfoEspecieHeader = ({ selected_species }) => {
   );
 };
 
+const imgEspecies = [Especie1, Especie2, Especie3, Especie4, Especie5];
+
+const EspecieNoEncontrada = () => {
+  return (
+    <Row style={{ display: "flex", alignItems: "center" }}>
+      <Col>
+        <Image
+          fluid
+          style={{
+            paddingRight: "0px",
+            alignSelf: "center",
+            height: "275px",
+            width: "275px",
+          }}
+          src={Especie}
+        />
+      </Col>
+      <Col style={{ paddingLeft: "0px" }}>
+        <Card.Title style={{ color: "#007bff" }}>
+          <h4>Especie no seleccionada!</h4>
+        </Card.Title>
+      </Col>
+    </Row>
+  );
+};
+
 const InfoEspecieBody = ({ selected_species }) => {
   const [cantidadInfectados, setCantidadInfectados] = useState(-1);
 
@@ -78,46 +106,47 @@ const InfoEspecieBody = ({ selected_species }) => {
   );
 
   return (
-    <Card.Body style={{ paddingTop: "0px" }}>
+    <Card.Body style={{ paddingTop: "0px", paddingLeft: "0px" }}>
       {selected_species.nombre === undefined ? (
-        <Card.Title style={{ color: "#007bff" }}>
-          Especie no seleccionada!
-        </Card.Title>
+        <EspecieNoEncontrada />
       ) : (
-        <div>
-          <Card.Title style={{ color: "#007bff" }}>
-            Nombre de la Especie:
-            <div
-              style={{ display: "inline-block", paddingLeft: "10px" }}
-              className="text-muted"
-            >
-              {selected_species.nombre}
-            </div>
-          </Card.Title>
-          <Card.Title style={{ color: "#007bff" }}>
-            Pais de origen:
-            <div
-              style={{ display: "inline-block", paddingLeft: "10px" }}
-              className="text-muted"
-            >
-              {selected_species.paisDeOrigen}
-            </div>
-          </Card.Title>
-        </div>
+        <Row style={{ display: "flex", alignItems: "center" }}>
+          <Col>
+            <Image
+              fluid
+              style={{
+                paddingRight: "0px",
+                alignSelf: "center",
+                height: "275px",
+                width: "275px",
+              }}
+              src={sample(imgEspecies)}
+            />
+          </Col>
+
+          <Col style={{ paddingLeft: "0px" }}>
+            <Card.Title style={{ color: "#007bff" }}>
+              <h3>Nombre de la Especie</h3>
+              <div className="text-muted">{selected_species.nombre}</div>
+            </Card.Title>
+            <Card.Title style={{ color: "#007bff" }}>
+              <h4> Pais de origen </h4>
+              <div className="text-muted">{selected_species.paisDeOrigen}</div>
+            </Card.Title>
+            <Card.Text>
+              <div style={{ display: "inline-block" }}>
+                Cantidad de vectores infectados:
+              </div>
+              <div
+                style={{ display: "inline-block", paddingLeft: "10px" }}
+                className="text-muted"
+              >
+                {cantidadInfectados}
+              </div>
+            </Card.Text>
+          </Col>
+        </Row>
       )}
-      <Card.Text>
-        <div style={{ display: "inline-block" }}>
-          Cantidad de vectores infectados:
-        </div>
-        <div
-          style={{ display: "inline-block", paddingLeft: "10px" }}
-          className="text-muted"
-        >
-          {cantidadInfectados !== -1
-            ? cantidadInfectados
-            : "Especie sin seleccionar"}
-        </div>
-      </Card.Text>
     </Card.Body>
   );
 };

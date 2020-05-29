@@ -15,7 +15,9 @@ function VerticallyCenteredModal(props) {
           {props.headerText}
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>{props.body}</Modal.Body>
+      <Modal.Body>
+        {React.cloneElement(props.body, { hide: props.onHide })}
+      </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>

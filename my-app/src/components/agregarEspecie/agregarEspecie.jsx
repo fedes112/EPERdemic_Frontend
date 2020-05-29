@@ -15,12 +15,14 @@ import { connect } from "react-redux";
 import { usePost } from "../../commons/hooks/useFetch";
 import { CLIENT_SERVER } from "../../commons/enums/enums";
 import { updateToCreatePathogen } from "../../redux/actions/backendPathogensActions";
+import { debounce } from "debounce";
 
 /* eslint-disable react-hooks/exhaustive-deps */
 const AgregarEspecie = ({
   ubicaciones,
   pathogen_to_create,
   selectToCreatePathogen,
+  hide,
 }) => {
   const { handleSubmit } = useForm();
   const [crearEspecie, setCrearEspecie] = useState(false);
@@ -49,8 +51,7 @@ const AgregarEspecie = ({
     ) {
       console.log("SENDING DATA:", pathogen_to_create);
       sendEspecie();
-      setCrearEspecie(false);
-      selectToCreatePathogen({});
+      hide();
     }
   }, [crearEspecie]);
 
@@ -59,11 +60,22 @@ const AgregarEspecie = ({
       <DropDownPatogenos />
       <AgregarEspecieForm
         ubicaciones={ubicaciones}
-        patogenoSelecc={pathogen_to_create.pathogen_name}
+        patogenoSelecc={pathogen_to_create.patogeno_tipo}
         selectToCreatePathogen={selectToCreatePathogen}
         pathogen_to_create={pathogen_to_create}
       />
-      <BotonAgregarEspecie />
+      <Button
+        style={{
+          paddingRight: "50px",
+          marginTop: "15px",
+          width: "-webkit-fill-available",
+        }}
+        variant="primary"
+        type="submit"
+        onClick={() => setCrearEspecie(true)}
+      >
+        ¡ Crear Especie !
+      </Button>
     </Form>
   );
 };
@@ -83,22 +95,6 @@ const AgregarEspecieForm = ({
         pathogen_to_create={pathogen_to_create}
       />
     </Card>
-  );
-};
-
-const BotonAgregarEspecie = () => {
-  return (
-    <Button
-      style={{
-        paddingRight: "50px",
-        marginTop: "15px",
-        width: "-webkit-fill-available",
-      }}
-      variant="primary"
-      type="submit"
-    >
-      ¡ Crear Especie !
-    </Button>
   );
 };
 
@@ -143,6 +139,15 @@ const FormNombreDeLaEspecie = ({
   selectToCreatePathogen,
   pathogen_to_create,
 }) => {
+  const namePatogen = (nombre) => {
+    selectToCreatePathogen({
+      ...pathogen_to_create,
+      nombre: nombre,
+    });
+  };
+
+  const debounceName = (nombre) => debounce(namePatogen(nombre), 800);
+
   return (
     <>
       <Col style={{ alignSelf: "flex-end" }} md="2">
@@ -154,12 +159,9 @@ const FormNombreDeLaEspecie = ({
           type="text"
           name="nombre"
           placeholder="Nombre de Especie"
-          onBlur={(data) =>
-            selectToCreatePathogen({
-              nombre: data.target.value,
-              ...pathogen_to_create,
-            })
-          }
+          onChange={(data) => {
+            debounceName(data.target.value);
+          }}
         />
       </Col>
     </>
@@ -175,13 +177,11 @@ const FormUbicacionDeOrigen = ({
 
   const handleCreate = (ubicacion) => {
     selectToCreatePathogen({
-      pathogen: pathogen_to_create.pathogen,
-      pathogen_name: pathogen_to_create.pathogen_name,
-      paisDeOrigen: ubicacion.nombreUbicacion
+      ...pathogen_to_create,
+      paisDeOrigen: ubicacion.nombreUbicacion,
     });
     setUbicacionSeleccionada(ubicacion.nombreUbicacion);
   };
-
   return (
     <>
       <Col style={{ alignSelf: "flex-end" }} md="2">

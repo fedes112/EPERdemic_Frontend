@@ -5,6 +5,7 @@ import {
   NO_SUCCESS_MESSAGE,
 } from "../../commons/hooks/useFetch";
 import { updateGroupName } from "../actions/clientGroupNameActions";
+import { updateClientReports } from "../actions/reportActions";
 import {
   updatePathogensList,
   updateUbicacionList,
@@ -43,6 +44,13 @@ const useClientDataSynchronization = () => {
     updatePathogensList,
     NO_SUCCESS_MESSAGE,
     "No se consiguieron patogenos del cliente backend",
+    useInterval
+  );
+  useFetchClientDataToStore(
+    "/estadisticas/reporteDeContagios",
+    updateClientReports,
+    NO_SUCCESS_MESSAGE,
+    "No se consiguieron reportes de contagio del cliente backend",
     useInterval
   );
   useFetchClientDataToStore(

@@ -5,10 +5,14 @@ import App from "./App";
 import useBackendSynchronization from "../redux/enrichers/backendSynchHook";
 import useClientSynchronization from "../redux/enrichers/clientSynchHook";
 
-const AppStoreEnricherWrapper = () => {
+const AppClientStoreEnricherWrapper = () => {
   useBackendSynchronization();
-  useClientSynchronization();
   return <App />;
+};
+
+const AppStoreEnricherWrapper = () => {
+  useClientSynchronization();
+  return <AppClientStoreEnricherWrapper />;
 };
 
 const AppReduxProviderWrapper = () => (

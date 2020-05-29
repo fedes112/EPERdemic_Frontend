@@ -15,6 +15,7 @@ const DropDownPatogenos = ({
     selectToCreatePathogen({
       pathogen: pathogen.id,
       pathogen_name: pathogen.tipo,
+      paisDeOrigen: selectToCreatePathogen.paisDeOrigen,
     });
     setPatogenoACrear(pathogen.tipo);
   };

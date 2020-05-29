@@ -175,8 +175,9 @@ const FormUbicacionDeOrigen = ({
 
   const handleCreate = (ubicacion) => {
     selectToCreatePathogen({
-      paisDeOrigen: ubicacion.nombreUbicacion,
-      ...pathogen_to_create,
+      pathogen: pathogen_to_create.pathogen,
+      pathogen_name: pathogen_to_create.pathogen_name,
+      paisDeOrigen: ubicacion.nombreUbicacion
     });
     setUbicacionSeleccionada(ubicacion.nombreUbicacion);
   };

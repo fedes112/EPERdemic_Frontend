@@ -27,7 +27,7 @@ const InfoEspecieHeader = ({ selected_species }) => {
   const [esPandemia, setEsPandemia] = useState(0);
 
   useEffect(() => {
-    if (Object.keys(selected_species).length !== 0 && false) {
+    if (Object.keys(selected_species).length !== 0) {
       console.log("Getting DATA:", selected_species.nombre);
       getPandemiaEs();
     }

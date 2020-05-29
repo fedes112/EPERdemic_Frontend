@@ -9,15 +9,12 @@ const DropDownPatogenos = ({
   selectToCreatePathogen,
   pathogen_to_create,
 }) => {
-  const [patogenoACrear, setPatogenoACrear] = useState();
-
   const handleCreate = (pathogen) => {
     selectToCreatePathogen({
+      ...pathogen_to_create,
       pathogen: pathogen.id,
-      pathogen_name: pathogen.tipo,
-      paisDeOrigen: selectToCreatePathogen.paisDeOrigen,
+      patogeno_tipo: pathogen.tipo,
     });
-    setPatogenoACrear(pathogen.tipo);
   };
 
   return (
@@ -25,7 +22,7 @@ const DropDownPatogenos = ({
       className="dropdown-pathogen-button"
       style={{ width: "-webkit-fill-available", marginBottom: "0.75rem" }}
       id="dropdown-basic-button"
-      title={pathogen_to_create.pathogen_name || "Patogenos"}
+      title={pathogen_to_create.patogeno_tipo || "Patogenos"}
     >
       {pathogens.map((pathogen, index) => (
         <Dropdown.Item

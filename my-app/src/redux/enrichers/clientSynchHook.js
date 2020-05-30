@@ -79,7 +79,7 @@ const useIntervalCallsToClient = () => {
       "/ubicacion/moverVectorRandom"
     ),
     callOnlyIfSimulationStarted,
-    5000
+    10000
   );
   useInterval(
     usePut(
@@ -89,7 +89,7 @@ const useIntervalCallsToClient = () => {
       "/ubicacion/expandir"
     ),
     callOnlyIfSimulationStarted,
-    5000
+    10000
   );
 };
 

@@ -12,7 +12,7 @@ const DropDownPatogenos = ({
   const handleCreate = (pathogen) => {
     selectToCreatePathogen({
       ...pathogen_to_create,
-      pathogen: pathogen.id,
+      pathogen_id: pathogen.id,
       patogeno_tipo: pathogen.tipo,
     });
   };

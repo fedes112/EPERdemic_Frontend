@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, Table, Row, Col } from "react-bootstrap";
 import Persona from "./resources/persona.png";
+import { connect } from "react-redux";
 
 const mockedData = [
   {
@@ -86,7 +87,9 @@ const RowVacia = () => {
   );
 };
 
-const EspeciesLeaderboard = () => {
+const EspeciesLeaderboard = (especies_lideres) => {
+  console.log("ACAAAAAAAAAAAAAAAAAAAAAA");
+  console.log(especies_lideres);
   return (
     <Row className="pt-0">
       <Col md="2" className="pr-0" style={{ paddingLeft: "10px" }}>
@@ -123,4 +126,8 @@ const EspeciesLeaderboard = () => {
   );
 };
 
-export default EspeciesLeaderboard;
+const mapStateToProps = (state) => ({
+  especies_lideres: state.client.especies_lideres,
+});
+
+export default connect(mapStateToProps)(EspeciesLeaderboard);

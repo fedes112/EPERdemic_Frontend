@@ -6,6 +6,7 @@ import {
 } from "../../commons/hooks/useFetch";
 import { updateGroupName } from "../actions/clientGroupNameActions";
 import { updateClientReports } from "../actions/reportActions";
+import { updateEspeciesLeaderBoard } from "../actions/clientEspeciesLeaderboardActions";
 import {
   updatePathogensList,
   updateUbicacionList,
@@ -64,6 +65,13 @@ const useClientDataSynchronization = () => {
     updateUbicacionList,
     "Ubicaciones cargadas",
     "No se consiguieron ubicaciones del cliente backend"
+  );
+  useFetchClientDataToStore(
+    "/estadisticas/lideres",
+    updateEspeciesLeaderBoard,
+    NO_SUCCESS_MESSAGE,
+    "No se consiguieron especies lideres del cliente backend",
+    useInterval
   );
 };
 

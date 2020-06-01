@@ -3,10 +3,6 @@ import { Card, Tabs, Tab } from "react-bootstrap";
 import UbicacionesLeaderboard from "./ubicacion/ubicacionesLeaderboard";
 import EspeciesLeaderboard from "./especiesLideres/especiesLeaderboard";
 
-//<Tab eventKey="especiesLideres" title="Mis especies lideres">
-//<EspeciesLeaderboard />
-//</Tab>
-
 const Leaderboard = () => {
   return (
     <Card className="m-2 shadow">
@@ -17,6 +13,9 @@ const Leaderboard = () => {
         >
           <Tab eventKey="ubicaciones" title="Ubicaciones">
             <UbicacionesLeaderboard />
+          </Tab>
+          <Tab eventKey="especiesLideres" title="Mis especies lideres">
+            <EspeciesLeaderboard />
           </Tab>
         </Tabs>
       </Card.Body>

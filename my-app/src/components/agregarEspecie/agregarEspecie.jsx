@@ -35,11 +35,12 @@ const AgregarEspecie = ({
     CLIENT_SERVER,
     "Se creo la especie con exito",
     "Hubo un problema creando la especie D:",
-    `/patogeno/${pathogen_to_create.pathogen}`,
+    `/patogeno/${pathogen_to_create.pathogen_id}`,
     () => {},
     {
       nombre: pathogen_to_create.nombre,
       paisDeOrigen: pathogen_to_create.paisDeOrigen,
+      patogenoId: pathogen_to_create.pathogen_id,
     }
   );
 
@@ -49,7 +50,11 @@ const AgregarEspecie = ({
       pathogen_to_create.paisDeOrigen &&
       crearEspecie
     ) {
-      console.log("SENDING DATA:", pathogen_to_create);
+      console.log("SENDING DATA:", {
+        nombre: pathogen_to_create.nombre,
+        paisDeOrigen: pathogen_to_create.paisDeOrigen,
+        patogenoId: pathogen_to_create.pathogen_id,
+      });
       sendEspecie();
       hide();
     }

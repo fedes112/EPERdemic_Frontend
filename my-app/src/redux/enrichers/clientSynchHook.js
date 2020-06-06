@@ -83,16 +83,6 @@ const useIntervalCallsToClient = () => {
     usePut(
       CLIENT_SERVER,
       NO_SUCCESS_MESSAGE,
-      "No se pudo pedir movimiento de vectores al cliente backend",
-      "/ubicacion/moverVectorRandom"
-    ),
-    callOnlyIfSimulationStarted,
-    10000
-  );
-  useInterval(
-    usePut(
-      CLIENT_SERVER,
-      NO_SUCCESS_MESSAGE,
       "No se pudo pedir expansion de especies al cliente backend",
       "/ubicacion/expandir"
     ),

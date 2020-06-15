@@ -72,6 +72,7 @@ const BotonAgregarPatogeno = () => {
       }}
       variant="primary"
       type="submit"
+      data-cy="Crear_Patogeno"
     >
       ¡ Crear Patogeno !
     </Button>

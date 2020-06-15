@@ -49,6 +49,7 @@ const SlideForm = ({ minusIcon, plusIcon, register, labelText }) => {
     <>
       <FontAwesomeIcon style={{ color: "#007bff" }} icon={minusIcon} />
       <Form.Control
+        data-cy={name}
         ref={register}
         name={name}
         type="range"

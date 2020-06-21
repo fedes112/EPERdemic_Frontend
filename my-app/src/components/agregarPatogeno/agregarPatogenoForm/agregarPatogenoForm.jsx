@@ -28,8 +28,9 @@ const AgregarPatogenoForm = ({ register }) => {
           </Col>
           <Col md="7">
             <Form.Control
+              id={"JOTA"}
               data-cy="add_pathogen_tipo_form"
-              ref={register}
+              ref={register({ required: true, maxLength: 50 })}
               name="tipo"
               style={{ width: "-webkit-fill-available" }}
               type="text"

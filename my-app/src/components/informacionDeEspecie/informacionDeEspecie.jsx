@@ -35,7 +35,7 @@ const InfoEspecieHeader = ({ selected_species }) => {
 
   const getPandemiaEs = useGet(
     CLIENT_SERVER,
-    "Solicitud mandada",
+    "Información de pandemia cargada",
     "Hubo un problema con la solicitud D:",
     `/patogeno/esPandemia/${selected_species.id}`,
     setEsPandemia
@@ -99,7 +99,7 @@ const InfoEspecieBody = ({ selected_species }) => {
 
   const getCantidadInfectados = useGet(
     CLIENT_SERVER,
-    "Solicitud mandada",
+    "Cantidad de infectados cargada",
     "Hubo un problema con la solicitud D:",
     `/patogeno/infectados/${selected_species.nombre}`,
     setCantidadInfectados

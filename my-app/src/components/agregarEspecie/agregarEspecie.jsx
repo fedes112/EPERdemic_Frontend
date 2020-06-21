@@ -56,6 +56,7 @@ const AgregarEspecie = ({
         patogenoId: pathogen_to_create.pathogen_id,
       });
       sendEspecie();
+      selectToCreatePathogen({});
       hide();
     }
   }, [crearEspecie]);
@@ -77,6 +78,13 @@ const AgregarEspecie = ({
         }}
         variant="primary"
         type="submit"
+        disabled={
+          !(
+            pathogen_to_create.paisDeOrigen &&
+            pathogen_to_create.nombre &&
+            pathogen_to_create.pathogen_id
+          )
+        }
         onClick={() => setCrearEspecie(true)}
       >
         ¡ Crear Especie !

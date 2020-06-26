@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Image, Table, Row, Col } from "react-bootstrap";
+import React from "react";
+import { Spinner, Image, Table, Row, Col } from "react-bootstrap";
 import Persona from "./resources/persona.png";
 import { connect } from "react-redux";
+import { isEmpty } from "lodash";
 
 const EspecieRow = ({ data }) => {
   return (
@@ -41,25 +42,36 @@ const EspeciesLeaderboard = (especies_lideres) => {
         md="10"
         style={{ paddingLeft: "20px", display: "flex", alignItems: "center" }}
       >
-        <Table size="sm" className="mb-0" striped bordered>
-          <thead>
-            <tr style={{ height: "45px" }}>
-              <th>Especie</th>
-              <th>Patogeno</th>
-              <th>Vectores infectados</th>
-              <th>Es Pandemia</th>
-            </tr>
-          </thead>
-          <tbody>
-            {[...Array(10)].map((_, i) =>
-              especies_lideres.especies_lideres[i] ? (
-                <EspecieRow data={especies_lideres.especies_lideres[i]} />
-              ) : (
-                <RowVacia />
-              )
-            )}
-          </tbody>
-        </Table>
+        {!isEmpty(especies_lideres) ? (
+          <Table size="sm" className="mb-0" striped bordered>
+            <thead>
+              <tr style={{ height: "45px" }}>
+                <th>Especie</th>
+                <th>Patogeno</th>
+                <th>Vectores infectados</th>
+                <th>Es Pandemia</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[...Array(10)].map((_, i) =>
+                especies_lideres.especies_lideres[i] ? (
+                  <EspecieRow data={especies_lideres.especies_lideres[i]} />
+                ) : (
+                  <RowVacia />
+                )
+              )}
+            </tbody>
+          </Table>
+        ) : (
+          <Spinner
+            variant="primary"
+            style={{ margin: "auto" }}
+            animation="border"
+            role="status"
+          >
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        )}
       </Col>
     </Row>
   );

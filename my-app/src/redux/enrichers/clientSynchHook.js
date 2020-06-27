@@ -1,4 +1,5 @@
 import { useStore } from "react-redux";
+import { useEffect } from "react";
 import {
   useGet,
   usePut,
@@ -135,13 +136,16 @@ export const useIntervalCallsToClient = () => {
 
   const getVelocity = (velocity) => velocityToMiliseconds[velocity];
 
-  setDynterval((context) => {
+  const dynterval = setDynterval((context) => {
     if (store.getState().simulation.started) {
       sendData();
     }
     const next = getVelocity(store.getState().simulation.velocity);
     console.log("Repeating Expansion call in... ", next);
     return { ...context, wait: next };
+  });
+  useEffect(() => {
+    return () => dynterval.clear();
   });
 };
 

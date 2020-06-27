@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import "./dropDownPatogenos.css";
 import { connect } from "react-redux";

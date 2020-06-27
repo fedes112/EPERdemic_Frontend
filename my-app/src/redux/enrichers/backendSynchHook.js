@@ -12,8 +12,6 @@ import { BACKEND_SERVER } from "../../commons/enums/enums";
 import useFetchAndDispatch from "../../commons/hooks/useFetchAndDispatch";
 import { isEmpty } from "lodash";
 
-const CALL_ALWAYS = () => true;
-
 const useSyncBackendToStore = (
   actionType,
   path,
@@ -22,6 +20,10 @@ const useSyncBackendToStore = (
   errorMessage,
   timedFunction
 ) => {
+  const store = useStore();
+  const wasAbleToConnectToClient = () =>
+    !isEmpty(store.getState().client.groupName);
+
   const sync = useFetchAndDispatch(
     actionType,
     successMessage,
@@ -30,11 +32,15 @@ const useSyncBackendToStore = (
     path,
     action
   );
-  timedFunction(sync, CALL_ALWAYS, 5000);
+  timedFunction(sync, wasAbleToConnectToClient, 10000);
 };
 
+/* eslint-disable react-hooks/exhaustive-deps */
 const useSyncStoreToBackend = (path, successMessage, errorMessage) => {
   const store = useStore();
+  const wasAbleToConnectToClient = () =>
+    !isEmpty(store.getState().client.groupName);
+
   const [clientData, setClientData] = useState();
 
   const sendData = usePost(
@@ -53,10 +59,13 @@ const useSyncStoreToBackend = (path, successMessage, errorMessage) => {
 
   const interval = () =>
     setInterval(() => {
-      if (!isEmpty(store.getState().reports.clientReports)) {
+      if (
+        !isEmpty(store.getState().reports.clientReports) &&
+        wasAbleToConnectToClient()
+      ) {
         setClientData(store.getState().reports.clientReports);
       }
-    }, 5000);
+    }, 10000);
 
   useEffect(() => {
     const id = interval();

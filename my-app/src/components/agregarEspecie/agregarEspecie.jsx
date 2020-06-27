@@ -56,6 +56,7 @@ const AgregarEspecie = ({
         patogenoId: pathogen_to_create.pathogen_id,
       });
       sendEspecie();
+      selectToCreatePathogen({});
       hide();
     }
   }, [crearEspecie]);
@@ -77,6 +78,13 @@ const AgregarEspecie = ({
         }}
         variant="primary"
         type="submit"
+        disabled={
+          !(
+            pathogen_to_create.paisDeOrigen &&
+            pathogen_to_create.nombre &&
+            pathogen_to_create.pathogen_id
+          )
+        }
         onClick={() => setCrearEspecie(true)}
       >
         ¡ Crear Especie !
@@ -163,7 +171,7 @@ const FormNombreDeLaEspecie = ({
           style={{ width: "-webkit-fill-available" }}
           type="text"
           name="nombre"
-          placeholder="Nombre de Especie"
+          placeholder={pathogen_to_create.nombre || "Nombre de Especie"}
           onChange={(data) => {
             debounceName(data.target.value);
           }}
@@ -196,7 +204,11 @@ const FormUbicacionDeOrigen = ({
         <DropdownButton
           className="dropdown-pathogen-button"
           id="dropdown-basic-button"
-          title={ubicacionSeleccionada || "Ubicaciones"}
+          title={
+            ubicacionSeleccionada ||
+            pathogen_to_create.paisDeOrigen ||
+            "Ubicaciones"
+          }
         >
           {ubicaciones.map((ubicacion, index) => (
             <Dropdown.Item

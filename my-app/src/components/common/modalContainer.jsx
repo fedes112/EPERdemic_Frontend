@@ -19,7 +19,9 @@ function VerticallyCenteredModal(props) {
         {React.cloneElement(props.body, { hide: props.onHide })}
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button data-cy="close_button" onClick={props.onHide}>
+          Close
+        </Button>
       </Modal.Footer>
     </Modal>
   );
@@ -34,12 +36,14 @@ const ModalContainer = ({ buttonText, buttonIcon, headerText, body }) => {
         className="m-2 shadow modal-container-button"
         variant="info"
         onClick={() => setModalShow(true)}
+        id={buttonText}
       >
         <h3> {buttonText} </h3>
         {buttonIcon}
       </Button>
 
       <VerticallyCenteredModal
+        data-cy="add_pathogen_modal"
         show={modalShow}
         onHide={() => setModalShow(false)}
         headerText={headerText}

@@ -10,7 +10,9 @@ import { isEmpty } from "lodash";
 /* eslint-disable react-hooks/exhaustive-deps */
 const AgregarPatogeno = () => {
   const [pathogen, setPathogen] = useState({});
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, formState } = useForm({
+    mode: "onChange",
+  });
 
   const handleSendPathogen = (data) => {
     setPathogen({
@@ -50,7 +52,7 @@ const AgregarPatogeno = () => {
         <Col md="5" className="pr-0">
           <ImagenVirus />
         </Col>
-        <BotonAgregarPatogeno />
+        <BotonAgregarPatogeno is_disabled={formState.isValid} />
       </Form.Group>
     </Form>
   );
@@ -62,7 +64,7 @@ const ImagenVirus = () => {
   );
 };
 
-const BotonAgregarPatogeno = () => {
+const BotonAgregarPatogeno = ({ is_disabled }) => {
   return (
     <Button
       style={{
@@ -70,8 +72,10 @@ const BotonAgregarPatogeno = () => {
         marginTop: "15px",
         width: "-webkit-fill-available",
       }}
+      disabled={!is_disabled}
       variant="primary"
       type="submit"
+      data-cy="Crear_Patogeno"
     >
       ¡ Crear Patogeno !
     </Button>
